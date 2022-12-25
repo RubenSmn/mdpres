@@ -1,4 +1,12 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import rehypeReact from "rehype-react";
+import rehypeSanitize, { defaultSchema } from "rehype-sanitize";
+import remarkGemoji from "remark-gemoji";
+import remarkGfm from "remark-gfm";
+import remarkParse from "remark-parse";
+import remarkRehype from "remark-rehype";
+import { unified } from "unified";
+import Code from "./Code";
 
 const showFile = (e: React.ChangeEvent<HTMLInputElement>, cb: any) => {
   e.preventDefault();
@@ -39,16 +47,43 @@ const handleFileText = (markdown: string) => {
   return slides;
 };
 
+const schema: any = {
+  ...defaultSchema,
+  attributes: {
+    ...defaultSchema.attributes,
+    code: [...(defaultSchema.attributes?.code || []), ["className"]],
+  },
+};
+
 function App() {
   const [slideIndex, setSlideIndex] = useState(0);
+  const [slides, setSlides] = useState<any>([]);
+
+  const md =
+    slides.length > 0 && slideIndex < slides.length
+      ? unified()
+          .use(remarkParse)
+          .use(remarkGfm)
+          .use(remarkGemoji)
+          .use(remarkRehype)
+          .use(rehypeSanitize, schema)
+          .use(rehypeReact, {
+            createElement: React.createElement,
+            components: {
+              code: Code,
+            },
+          })
+          .processSync(slides[slideIndex].content).result
+      : null;
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     showFile(e, (res: any) => {
       console.log(res);
+      setSlides(res);
     });
   };
 
-  const changeSlideIndex = (value: number) => {
+  const changeSlideIndexByValue = (value: number) => {
     setSlideIndex((prevIndex) => {
       const newIndex = prevIndex + value;
       if (newIndex < 0) return prevIndex;
@@ -59,11 +94,11 @@ function App() {
   useEffect(() => {
     const handleKeyUp = (e: KeyboardEvent) => {
       if (e.key === "ArrowRight") {
-        changeSlideIndex(1);
+        changeSlideIndexByValue(1);
         return null;
       }
       if (e.key === "ArrowLeft") {
-        changeSlideIndex(-1);
+        changeSlideIndexByValue(-1);
         return null;
       }
     };
@@ -78,6 +113,7 @@ function App() {
       <section className="slide-content">
         <h1>Slide with index {slideIndex}</h1>
         <input type="file" onChange={handleChange} />
+        <div className="markdown-body">{md}</div>
       </section>
     </main>
   );
