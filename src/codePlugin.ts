@@ -1,6 +1,14 @@
 import { visit } from "unist-util-visit";
 import Prism from "prismjs";
 
+const specialChars: { [key: string]: string } = {
+  amp: "&",
+  lt: "<",
+  gt: ">",
+  quot: '"',
+  "#039": "'",
+};
+
 export const codePlugin: any = () => {
   return function transformer(tree: any) {
     const bold = (node: any) => {
@@ -58,12 +66,10 @@ export const codePlugin: any = () => {
 
           const newClassName = x.match(/(?<=").*(?=\")/);
           const value = x.match(/(?<=\>).*$/g);
-          if (/^\&/.test(value)) {
-            console.log("the value", value[0]);
-            const map = { amp: "&", lt: "<", gt: ">", quot: '"', "#039": "'" };
 
-            value[0] = value[0].replace(/&([^;]+);/g, (m, c) => map[c]);
-          }
+          const content = value[0] || null;
+
+          if (content === null || content === "") continue;
 
           lineNodes.push({
             type: "element",
@@ -74,7 +80,10 @@ export const codePlugin: any = () => {
             children: [
               {
                 type: "text",
-                value: value ? value[0] : "",
+                value: content.replace(
+                  /&([^;]+);/g,
+                  (_: string, c: string) => specialChars[c],
+                ),
               },
             ],
           });
