@@ -6,37 +6,20 @@ export const codePlugin: any = () => {
     const bold = (node: any) => {
       if (node.tagName !== "code") return;
 
-      console.log("before node", { ...node });
-
       const lines = node.children[0].value.split(/\n\r?/g);
       lines.pop();
 
-      const className =
+      const language =
         node.properties.className[0].replace("language-", "") || "";
-
-      // const htmlLines = lines
-      //   .map((line: string) => {
-      //     return Prism.highlight(
-      //       line,
-      //       Prism.languages[className || "javascript"],
-      //       className,
-      //     );
-      //   })
-      //   .map((line: string) => {
-      //     const newLine = line.replace(/\s+(?=\<)/g, (match: string) => {
-      //       return `<span>${match}</span>`;
-      //     });
-      //     return newLine;
-      //   });
 
       node.children = [];
 
-      const htmlLines = lines
+      lines
         .map((line: string) => {
           return Prism.highlight(
             line,
-            Prism.languages[className || "javascript"],
-            className,
+            Prism.languages[language || "javascript"],
+            language,
           );
         })
         .forEach((line: string) => {
@@ -50,13 +33,69 @@ export const codePlugin: any = () => {
           return newLine;
         });
 
-      // console.log("the new lines", htmlLines);
-      // node.children[0] = htmlLines;
+      const newNodeChildren = [];
+
+      for (const child of node.children) {
+        const test = child.value.split(/(?:<span(?: class=)?>?)|(?:<\/span)/g);
+
+        const lineNodes = [];
+
+        for (const x of test) {
+          if (x === "") continue;
+          if (/^\s+$/.test(x)) {
+            lineNodes.push({
+              type: "element",
+              tagName: "span",
+              children: [
+                {
+                  type: "text",
+                  value: x,
+                },
+              ],
+            });
+            continue;
+          }
+
+          const newClassName = x.match(/(?<=").*(?=\")/);
+          const value = x.match(/(?<=\>).*$/g);
+          if (/^\&/.test(value)) {
+            console.log("the value", value[0]);
+            const map = { amp: "&", lt: "<", gt: ">", quot: '"', "#039": "'" };
+
+            value[0] = value[0].replace(/&([^;]+);/g, (m, c) => map[c]);
+          }
+
+          lineNodes.push({
+            type: "element",
+            tagName: "span",
+            properties: {
+              ...(newClassName && { className: [newClassName] }),
+            },
+            children: [
+              {
+                type: "text",
+                value: value ? value[0] : "",
+              },
+            ],
+          });
+        }
+
+        const lineNode = {
+          type: "element",
+          tagName: "span",
+          properties: {
+            className: ["wenky-line"],
+          },
+          children: lineNodes,
+        };
+
+        newNodeChildren.push(lineNode);
+      }
+
+      node.children = newNodeChildren;
 
       if (node.data !== null || node.data !== undefined)
         node.properties["data"] = node.data;
-
-      console.log("node after", node);
     };
 
     visit(tree, "element", bold);

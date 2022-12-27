@@ -1,14 +1,27 @@
 import React, { useEffect } from "react";
-import Prism from "prismjs";
+// import "./../node_modules/prismjs/plugins/line-numbers/prism-line-numbers.js";
+// import "./../node_modules/prismjs/plugins/line-numbers/prism-line-numbers.css";
 
-const Code: React.FC<any> = ({ children, className }) => {
-  useEffect(() => {
-    Prism.highlightAll();
-  }, [className, children]);
+// import "./../node_modules/prismjs/plugins/line-highlight/prism-line-highlight.js";
+// import "./../node_modules/prismjs/plugins/line-highlight/prism-line-highlight.css";
 
+const Code: React.FC<any> = ({ children, data, className }) => {
   return (
-    <code key={children} className={className}>
-      {children}
+    <code>
+      {children.map((line: any, idx: number) => {
+        return (
+          <span
+            className="wenky-line"
+            style={{
+              display: "flex",
+              lineHeight: "24px",
+            }}
+            key={`line-${idx}`}
+          >
+            {line}
+          </span>
+        );
+      })}
     </code>
   );
 };

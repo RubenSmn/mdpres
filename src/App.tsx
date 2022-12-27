@@ -7,6 +7,7 @@ import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import { unified } from "unified";
 import Code from "./Code";
+import { codePlugin } from "./codePlugin";
 
 const showFile = (e: React.ChangeEvent<HTMLInputElement>, cb: any) => {
   e.preventDefault();
@@ -51,7 +52,7 @@ const schema: any = {
   ...defaultSchema,
   attributes: {
     ...defaultSchema.attributes,
-    code: [...(defaultSchema.attributes?.code || []), ["className"]],
+    code: [...(defaultSchema.attributes?.code || []), ["className"], ["data"]],
   },
 };
 
@@ -67,6 +68,7 @@ function App() {
           .use(remarkGemoji)
           .use(remarkRehype)
           .use(rehypeSanitize, schema)
+          .use(codePlugin)
           .use(rehypeReact, {
             createElement: React.createElement,
             components: {

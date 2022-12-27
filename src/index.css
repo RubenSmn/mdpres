@@ -1,6 +1,8 @@
 @import "./normalize.css";
 @import "./../node_modules/github-markdown-css/github-markdown.css";
-@import "./prism.css";
+/* @import "./../node_modules/prismjs/themes/prism-tomorrow.min.css"; */
+@import "./../node_modules/prismjs/themes/prism-okaidia.min.css";
+/* @import "./prism.css"; */
 
 .slides {
   height: 100vh;
@@ -8,4 +10,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+code > span > span {
+  height: 24px;
+  line-height: 24px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.line-numbers .line-numbers-rows {
+  top: -4px;
+}
+
+.line-numbers-rows > span {
+  height: 24px;
 }
