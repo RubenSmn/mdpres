@@ -19,6 +19,27 @@ code > span > span {
   align-items: center;
 }
 
+.code-line {
+  display: flex;
+  position: relative;
+  padding-left: 3rem;
+}
+
+.code-line .line-number {
+  position: absolute;
+  top: 0;
+  left: -4rem;
+  display: inline-flex;
+  justify-content: end;
+  width: 3rem;
+  padding-right: 0.5rem;
+  border-right: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.code-line.blurred {
+  filter: blur(0.07rem);
+}
+
 .line-numbers .line-numbers-rows {
   top: -4px;
 }
