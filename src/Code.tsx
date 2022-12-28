@@ -18,7 +18,8 @@ const Code: React.FC<any> = ({ children, data }) => {
   const isInRange = (value: number) => {
     const range = ranges[subSlideIndex];
     if (range.length === 1 && range[0] === value + lineOffset) return true;
-    if (value >= range[0] && value < range[1]) return true;
+    if (value + lineOffset >= range[0] && value + lineOffset <= range[1])
+      return true;
     return false;
   };
 
