@@ -1,13 +1,5 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
-import rehypeReact from "rehype-react";
-import rehypeSanitize, { defaultSchema } from "rehype-sanitize";
-import remarkGemoji from "remark-gemoji";
-import remarkGfm from "remark-gfm";
-import remarkParse from "remark-parse";
-import remarkRehype from "remark-rehype";
-import { unified } from "unified";
-import Code from "./Code";
-import { codePlugin } from "./codePlugin";
+import React, { useCallback, useEffect, useState } from "react";
+import { useMarkdownContent } from "./hooks";
 import SlideProvider, { useSlideContext } from "./SlideProvider";
 
 const showFile = (e: React.ChangeEvent<HTMLInputElement>, cb: any) => {
@@ -59,38 +51,12 @@ const handleFileText = (markdown: string) => {
   return slides;
 };
 
-const schema: any = {
-  ...defaultSchema,
-  attributes: {
-    ...defaultSchema.attributes,
-    code: [...(defaultSchema.attributes?.code || []), ["className"], ["data"]],
-  },
-};
-
 function App() {
   const [slideIndex, setSlideIndex] = useState(0);
   const [slides, setSlides] = useState<any>([]);
   const { subSlideIndex, setSubSlideIndex } = useSlideContext();
 
-  const md = useMemo(() => {
-    if (slides.length > 0 && slideIndex < slides.length) {
-      return unified()
-        .use(remarkParse)
-        .use(remarkGfm)
-        .use(remarkGemoji)
-        .use(remarkRehype)
-        .use(rehypeSanitize, schema)
-        .use(codePlugin)
-        .use(rehypeReact, {
-          createElement: React.createElement,
-          components: {
-            code: Code,
-          },
-        })
-        .processSync(slides[slideIndex].content).result;
-    }
-    return null;
-  }, [slides, slideIndex]);
+  const markdown = useMarkdownContent(slides, slideIndex);
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     showFile(e, (res: any) => {
@@ -144,7 +110,7 @@ function App() {
       <section className="slide-content">
         <h1>Slide with index {slideIndex}</h1>
         <input type="file" onChange={handleChange} />
-        <div className="markdown-body">{md}</div>
+        <div className="markdown-body">{markdown}</div>
       </section>
     </main>
   );
