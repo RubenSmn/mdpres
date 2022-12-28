@@ -1,15 +1,23 @@
-import React from "react";
+import React, { useMemo } from "react";
+import { useSlideContext } from "./SlideProvider";
 
 const Code: React.FC<any> = ({ children, data }) => {
-  let range = [0, children.length];
   const lineOffset = 1;
+  const { subSlideIndex } = useSlideContext();
 
-  if (data !== undefined && data.meta !== undefined) {
-    const ranges = data.meta.split("-").map((point: string) => parseInt(point));
-    range = ranges;
-  }
+  const ranges = useMemo(() => {
+    if (data === undefined || data.meta === undefined)
+      return [[0, children.length]];
+
+    const newRanges = data.meta.split("|").map((subSlide: string) => {
+      return subSlide.split("-").map((point: string) => parseInt(point));
+    });
+    return newRanges;
+  }, [children.length, data]);
 
   const isInRange = (value: number) => {
+    const range = ranges[subSlideIndex];
+    if (range.length === 1 && range[0] === value + lineOffset) return true;
     if (value >= range[0] && value < range[1]) return true;
     return false;
   };

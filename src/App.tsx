@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import rehypeReact from "rehype-react";
 import rehypeSanitize, { defaultSchema } from "rehype-sanitize";
 import remarkGemoji from "remark-gemoji";
@@ -8,6 +8,7 @@ import remarkRehype from "remark-rehype";
 import { unified } from "unified";
 import Code from "./Code";
 import { codePlugin } from "./codePlugin";
+import SlideProvider, { useSlideContext } from "./SlideProvider";
 
 const showFile = (e: React.ChangeEvent<HTMLInputElement>, cb: any) => {
   e.preventDefault();
@@ -33,8 +34,18 @@ const handleFileText = (markdown: string) => {
   if (configs === null) return;
   for (let i = 0; i < configs.length; i++) {
     const config = configs[i];
-    const data: { [key: string]: string } = {
+    const subslides = content[i].match(
+      /^```(?<language>\w+)(?: (?<highlights>.*))?$/m,
+    );
+
+    // const language = subslides?.groups?.language;
+    const highlightsRaw = subslides?.groups?.highlights || "";
+
+    const highlights = highlightsRaw.split("|").length;
+
+    const data: { [key: string]: string | number } = {
       content: content[i],
+      highlightCount: highlights,
     };
     const lines = config.trim().split(/\n\r?/);
     for (const line of lines) {
@@ -59,24 +70,27 @@ const schema: any = {
 function App() {
   const [slideIndex, setSlideIndex] = useState(0);
   const [slides, setSlides] = useState<any>([]);
+  const { subSlideIndex, setSubSlideIndex } = useSlideContext();
 
-  const md =
-    slides.length > 0 && slideIndex < slides.length
-      ? unified()
-          .use(remarkParse)
-          .use(remarkGfm)
-          .use(remarkGemoji)
-          .use(remarkRehype)
-          .use(rehypeSanitize, schema)
-          .use(codePlugin)
-          .use(rehypeReact, {
-            createElement: React.createElement,
-            components: {
-              code: Code,
-            },
-          })
-          .processSync(slides[slideIndex].content).result
-      : null;
+  const md = useMemo(() => {
+    if (slides.length > 0 && slideIndex < slides.length) {
+      return unified()
+        .use(remarkParse)
+        .use(remarkGfm)
+        .use(remarkGemoji)
+        .use(remarkRehype)
+        .use(rehypeSanitize, schema)
+        .use(codePlugin)
+        .use(rehypeReact, {
+          createElement: React.createElement,
+          components: {
+            code: Code,
+          },
+        })
+        .processSync(slides[slideIndex].content).result;
+    }
+    return null;
+  }, [slides, slideIndex]);
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     showFile(e, (res: any) => {
@@ -85,13 +99,24 @@ function App() {
     });
   };
 
-  const changeSlideIndexByValue = (value: number) => {
-    setSlideIndex((prevIndex) => {
-      const newIndex = prevIndex + value;
-      if (newIndex < 0) return prevIndex;
-      return newIndex;
-    });
-  };
+  const changeSlideIndexByValue = useCallback(
+    (value: number) => {
+      const highlightCount = slides[slideIndex].highlightCount;
+      if (highlightCount > 1 && subSlideIndex < highlightCount - 1) {
+        return setSubSlideIndex((prevIndex: number) => {
+          return prevIndex + value;
+        });
+      }
+
+      setSlideIndex((prevIndex) => {
+        const newIndex = prevIndex + value;
+        if (newIndex < 0) return prevIndex;
+        return newIndex;
+      });
+      setSubSlideIndex(0);
+    },
+    [slideIndex, slides, subSlideIndex, setSubSlideIndex],
+  );
 
   useEffect(() => {
     const handleKeyUp = (e: KeyboardEvent) => {
@@ -108,7 +133,7 @@ function App() {
     window.addEventListener("keyup", handleKeyUp);
 
     return () => window.removeEventListener("keyup", handleKeyUp);
-  }, []);
+  }, [changeSlideIndexByValue]);
 
   return (
     <main className="slides">
@@ -121,4 +146,10 @@ function App() {
   );
 }
 
-export default App;
+export default function AppWithProvider() {
+  return (
+    <SlideProvider>
+      <App />
+    </SlideProvider>
+  );
+}

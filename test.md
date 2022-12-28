@@ -9,7 +9,7 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde esse rem quam id
 voluptate suscipit fuga necessitatibus doloremque magnam, itaque autem illum in
 earum at consectetur distinctio. Suscipit, eligendi fugit.
 
-```js 2-4
+```js 2-4|5
 const changeSlideIndex = (value: number) => {
   setSlideIndex((prevIndex) => {
     const newIndex = prevIndex + value;
