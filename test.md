@@ -9,14 +9,27 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde esse rem quam id
 voluptate suscipit fuga necessitatibus doloremque magnam, itaque autem illum in
 earum at consectetur distinctio. Suscipit, eligendi fugit.
 
-```js 2-4|5
-const changeSlideIndex = (value: number) => {
-  setSlideIndex((prevIndex) => {
-    const newIndex = prevIndex + value;
-    if (newIndex < 0) return prevIndex;
-    return newIndex;
-  });
-};
+```js 3-4|6|12-16
+const changeSlideIndexByValue = useCallback(
+  (delta: number) => {
+    const highlightCount = slides[slideIndex].highlightCount;
+    if (highlightCount > 1 && subSlideIndex + delta < highlightCount) {
+      return setSubSlideIndex((prevIndex: number) => {
+        const newIndex = prevIndex + delta;
+        if (newIndex < 0) return prevIndex;
+        return newIndex;
+      });
+    }
+
+    setSlideIndex((prevIndex) => {
+      const newIndex = prevIndex + delta;
+      if (newIndex < 0) return prevIndex;
+      return newIndex;
+    });
+    setSubSlideIndex(0);
+  },
+  [slideIndex, slides, subSlideIndex, setSubSlideIndex],
+);
 ```
 
 ---
