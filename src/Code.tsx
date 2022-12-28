@@ -16,6 +16,7 @@ const Code: React.FC<any> = ({ children, data }) => {
       return [[1, children.length]];
 
     const newRanges = data.meta.split("|").map((subSlide: string) => {
+      if (subSlide === "") return [1, children.length];
       return subSlide.split("-").map((point: string) => parseInt(point));
     });
     return newRanges;

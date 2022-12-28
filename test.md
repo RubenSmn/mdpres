@@ -42,7 +42,7 @@ background: blue
 Voluptate suscipit fuga **necessitatibus** doloremque magnam, itaque autem illum in
 earum at consectetur distinctio. Suscipit, eligendi fugit.
 
-```css 2-4
+```css |3-4
 .test-class {
   background-color: yellow;
   display: flex;
