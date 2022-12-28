@@ -7,7 +7,7 @@ const Code: React.FC<any> = ({ children, data }) => {
 
   const ranges = useMemo(() => {
     if (data === undefined || data.meta === undefined)
-      return [[0, children.length]];
+      return [[1, children.length]];
 
     const newRanges = data.meta.split("|").map((subSlide: string) => {
       return subSlide.split("-").map((point: string) => parseInt(point));
