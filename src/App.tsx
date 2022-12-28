@@ -120,13 +120,15 @@ function App() {
 
   useEffect(() => {
     const handleKeyUp = (e: KeyboardEvent) => {
-      if (e.key === "ArrowRight") {
-        changeSlideIndexByValue(1);
-        return null;
-      }
-      if (e.key === "ArrowLeft") {
-        changeSlideIndexByValue(-1);
-        return null;
+      switch (e.key) {
+        case "ArrowLeft":
+          changeSlideIndexByValue(-1);
+          break;
+        case "ArrowRight":
+          changeSlideIndexByValue(1);
+          break;
+        default:
+          break;
       }
     };
 
