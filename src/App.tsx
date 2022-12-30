@@ -13,6 +13,7 @@ const showFile = (e: React.ChangeEvent<HTMLInputElement>, cb: any) => {
 
   const files = e.target.files;
   if (files === null) return;
+  if (!/[a-zA-Z0-9]*\.md/.test(files[0].name)) return;
   reader.readAsText(files[0]);
 };
 
@@ -111,7 +112,12 @@ function App() {
     <main className="slides">
       <section className="slide-content">
         <h1>Slide with index {slideIndex}</h1>
-        <input type="file" onChange={handleChange} />
+        <input
+          type="file"
+          onChange={handleChange}
+          name="presentation-file"
+          accept=".md"
+        />
         <div className="markdown-body">{markdown}</div>
       </section>
     </main>
