@@ -68,20 +68,22 @@ function App() {
   const changeSlideIndexByValue = useCallback(
     (delta: number) => {
       const highlightCount = slides[slideIndex].highlightCount;
-      if (highlightCount > 1 && subSlideIndex + delta < highlightCount) {
-        return setSubSlideIndex((prevIndex: number) => {
+
+      if (
+        subSlideIndex + delta < highlightCount &&
+        subSlideIndex + delta >= 0
+      ) {
+        setSubSlideIndex((prevIndex) => {
+          return prevIndex + delta;
+        });
+      } else {
+        setSlideIndex((prevIndex) => {
           const newIndex = prevIndex + delta;
           if (newIndex < 0) return prevIndex;
           return newIndex;
         });
+        setSubSlideIndex(0);
       }
-
-      setSlideIndex((prevIndex) => {
-        const newIndex = prevIndex + delta;
-        if (newIndex < 0) return prevIndex;
-        return newIndex;
-      });
-      setSubSlideIndex(0);
     },
     [slideIndex, slides, subSlideIndex, setSubSlideIndex],
   );
