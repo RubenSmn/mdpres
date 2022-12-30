@@ -23,6 +23,7 @@ code > span > span {
   display: flex;
   position: relative;
   padding-left: 3rem;
+  transition: filter 200ms ease-in;
 }
 
 .code-line .line-number {
