@@ -12,9 +12,11 @@ const showFile = (e: React.ChangeEvent<HTMLInputElement>, cb: any) => {
   };
 
   const files = e.target.files;
-  if (files === null) return;
-  if (!/[a-zA-Z0-9]*\.md/.test(files[0].name)) return;
+  if (files === null) return "No file found";
+  if (!/[a-zA-Z0-9]*\.md/.test(files[0].name))
+    return "File not of type Markdown(md)";
   reader.readAsText(files[0]);
+  return null;
 };
 
 const handleFileText = (markdown: string) => {
@@ -55,15 +57,17 @@ const handleFileText = (markdown: string) => {
 function App() {
   const [slideIndex, setSlideIndex] = useState(0);
   const [slides, setSlides] = useState<any>([]);
+  const [error, setError] = useState<string | null>(null);
   const { subSlideIndex, setSubSlideIndex } = useSlideContext();
 
   const markdown = useMarkdownContent(slides, slideIndex);
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    showFile(e, (res: any) => {
+    const fileError = showFile(e, (res: any) => {
       console.log(res);
       setSlides(res);
     });
+    setError(fileError);
   };
 
   const changeSlideIndexByValue = useCallback(
@@ -118,6 +122,7 @@ function App() {
           name="presentation-file"
           accept=".md"
         />
+        {error !== null && <p>{error}</p>}
         <div className="markdown-body">{markdown}</div>
       </section>
     </main>
