@@ -24,9 +24,15 @@ const Code: React.FC<any> = ({ children, data }) => {
   }, [children.length, data]);
 
   const isInRange = (value: number) => {
-    const range = ranges[subSlideIndex];
-    if (range.length === 1 && range[0] === value + lineOffset) return true;
-    if (value + lineOffset >= range[0] && value + lineOffset <= range[1])
+    const currentRange = ranges[subSlideIndex];
+    // checks for one line
+    if (currentRange.length === 1 && currentRange[0] === value + lineOffset)
+      return true;
+    // checks for multiple lines
+    if (
+      value + lineOffset >= currentRange[0] &&
+      value + lineOffset <= currentRange[1]
+    )
       return true;
     return false;
   };
