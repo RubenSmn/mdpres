@@ -71,12 +71,13 @@ function App() {
   };
 
   const changeSlideIndexByValue = useCallback(
-    (delta: number) => {
+    (delta: number, skipSubs: boolean) => {
       const highlightCount = slides[slideIndex].highlightCount;
 
       if (
         subSlideIndex + delta < highlightCount &&
-        subSlideIndex + delta >= 0
+        subSlideIndex + delta >= 0 &&
+        skipSubs === false
       ) {
         setSubSlideIndex((prevIndex) => {
           return prevIndex + delta;
@@ -97,10 +98,10 @@ function App() {
     const handleKeyUp = (e: KeyboardEvent) => {
       switch (e.key) {
         case "ArrowLeft":
-          changeSlideIndexByValue(-1);
+          changeSlideIndexByValue(-1, e.shiftKey);
           break;
         case "ArrowRight":
-          changeSlideIndexByValue(1);
+          changeSlideIndexByValue(1, e.shiftKey);
           break;
         default:
           break;
