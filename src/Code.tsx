@@ -41,17 +41,26 @@ const Code: React.FC<any> = ({ children, data }) => {
       ? ranges[subSlideIndex][1] - ranges[subSlideIndex][0]
       : 0;
 
+  // code line vars
+  const lineHeight = 24;
+  const visibleLineCount = 10;
+  const codeHeight =
+    children.length > visibleLineCount
+      ? visibleLineCount * lineHeight
+      : children.length * lineHeight;
+
   // scroll handler for the subslides
   const scrollSmoothHandler = useCallback(
     (index: number) => {
       if (scrollRefs.current.length < 1) return;
       const centerIndex = Math.floor(index / 2);
-      if (centerIndex > 1 && rangeDiff < 4) index = index + centerIndex;
+      if (centerIndex > 1 && rangeDiff < visibleLineCount)
+        index = index + centerIndex - 1;
 
       scrollRefs.current[index].current?.scrollIntoView({
         behavior: "smooth",
         // if there are less than 4 lines in the range then just center
-        block: rangeDiff < 4 ? "center" : "start",
+        block: rangeDiff < visibleLineCount ? "center" : "start",
       });
     },
     [scrollRefs, rangeDiff],
@@ -65,7 +74,7 @@ const Code: React.FC<any> = ({ children, data }) => {
   return (
     <code
       style={{
-        height: 7 * 24,
+        height: codeHeight,
         display: "block",
         overflowY: "scroll",
       }}
