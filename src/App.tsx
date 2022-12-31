@@ -116,15 +116,20 @@ function App() {
   return (
     <main className="slides">
       <section className="slide-content">
-        <h1>Slide with index {slideIndex}</h1>
-        <input
-          type="file"
-          onChange={handleChange}
-          name="presentation-file"
-          accept=".md"
-        />
-        {error !== null && <p>{error}</p>}
-        <div className="markdown-body">{markdown}</div>
+        {slides.length < 1 ? (
+          <>
+            <h1>Slide with index {slideIndex}</h1>
+            <input
+              type="file"
+              onChange={handleChange}
+              name="presentation-file"
+              accept=".md"
+            />
+            {error !== null && <p>{error}</p>}
+          </>
+        ) : (
+          <div className="markdown-body">{markdown}</div>
+        )}
       </section>
     </main>
   );
