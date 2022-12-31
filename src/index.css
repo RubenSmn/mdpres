@@ -12,8 +12,6 @@
   height: 100vh;
   width: 100vw;
   display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .slide-content {
@@ -24,6 +22,9 @@
 .slide-content .markdown-body {
   padding: 2rem;
   height: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 code > span > span {
@@ -36,7 +37,7 @@ code > span > span {
 .code-line {
   display: flex;
   position: relative;
-  padding-left: 3rem;
+  padding-left: 2rem;
   transition: filter 200ms ease-in;
 }
 
