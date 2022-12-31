@@ -45,6 +45,8 @@ const Code: React.FC<any> = ({ children, data }) => {
   const scrollSmoothHandler = useCallback(
     (index: number) => {
       if (scrollRefs.current.length < 1) return;
+      const centerIndex = Math.floor(index / 2);
+      if (centerIndex > 1 && rangeDiff < 4) index = index + centerIndex;
 
       scrollRefs.current[index].current?.scrollIntoView({
         behavior: "smooth",
