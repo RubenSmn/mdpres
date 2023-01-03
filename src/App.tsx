@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { processMarkdownContent } from "./hooks";
-import Slide from "./Slide";
+import Presentation from "./Presentation";
 
 const showFile = (e: React.ChangeEvent<HTMLInputElement>, cb: any) => {
   e.preventDefault();
@@ -54,11 +54,7 @@ const handleFileText = (markdown: string) => {
   return slides;
 };
 
-const translateAxis = "X";
-
 export default function App() {
-  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
-  const [subSlideIndex, setSubSlideIndex] = useState(0);
   const [slides, setSlides] = useState<any>([]);
   const [error, setError] = useState<string | null>(null);
 
@@ -74,52 +70,9 @@ export default function App() {
     setError(fileError);
   };
 
-  const changeSlideIndexByValue = useCallback(
-    (delta: number, skipSubs: boolean) => {
-      const highlightCount = slides[currentSlideIndex].highlightCount;
-      if (
-        subSlideIndex + delta < highlightCount &&
-        subSlideIndex + delta >= 0 &&
-        skipSubs === false
-      ) {
-        setSubSlideIndex((prevIndex) => {
-          return prevIndex + delta;
-        });
-      } else {
-        setCurrentSlideIndex((prevIndex) => {
-          const newIndex = prevIndex + delta;
-          if (newIndex < 0) return prevIndex;
-          if (newIndex > slides.length - 1) return prevIndex;
-          return newIndex;
-        });
-        setSubSlideIndex(0);
-      }
-    },
-    [slides, currentSlideIndex, subSlideIndex, setSubSlideIndex],
-  );
-
-  useEffect(() => {
-    const handleKeyUp = (e: KeyboardEvent) => {
-      switch (e.key) {
-        case "ArrowLeft":
-          changeSlideIndexByValue(-1, e.shiftKey);
-          break;
-        case "ArrowRight":
-          changeSlideIndexByValue(1, e.shiftKey);
-          break;
-        default:
-          break;
-      }
-    };
-
-    window.addEventListener("keyup", handleKeyUp);
-
-    return () => window.removeEventListener("keyup", handleKeyUp);
-  }, [changeSlideIndexByValue]);
-
   return slides.length < 1 ? (
     <>
-      <h1>Slide with index {currentSlideIndex}</h1>
+      <h1>Upload your Markdown presentation file</h1>
       <input
         type="file"
         onChange={handleChange}
@@ -129,24 +82,6 @@ export default function App() {
       {error !== null && <p>{error}</p>}
     </>
   ) : (
-    <main
-      className="slides"
-      style={{
-        width: "100%",
-      }}
-    >
-      {slides.map((slide: any, idx: number) => {
-        return (
-          <Slide
-            key={`slide-${idx}`}
-            currentSlideIndex={currentSlideIndex}
-            content={slide.markdown}
-            slideIndex={idx}
-            subSlideIndex={subSlideIndex}
-            translateAxis={translateAxis}
-          />
-        );
-      })}
-    </main>
+    <Presentation slides={slides} />
   );
 }
