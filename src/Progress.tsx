@@ -29,14 +29,14 @@ const Progress: React.FC<ProgressProps> = ({
       }
       return progress;
     },
-    1,
+    0,
   );
 
   return (
     <div className="progress-container">
       <div
         style={{
-          width: `${(currentProgress / totalSlides) * 100}%`,
+          width: `${(currentProgress / (totalSlides - 1)) * 100}%`,
         }}
       ></div>
     </div>
