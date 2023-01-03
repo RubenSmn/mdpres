@@ -75,6 +75,7 @@ const Code: React.FC<any> = ({ children, data }) => {
 
   useEffect(() => {
     // run the scroll handler when the subSlideIndex changes
+    if (subSlideIndex === 0) return;
     scrollSmoothHandler(ranges[subSlideIndex][0] - 1);
   }, [subSlideIndex, ranges, scrollSmoothHandler]);
 

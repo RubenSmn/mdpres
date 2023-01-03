@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { useMarkdownContent } from "./hooks";
-import SlideProvider, { useSlideContext } from "./SlideProvider";
+import { processMarkdownContent } from "./hooks";
+import Slide from "./Slide";
 
 const showFile = (e: React.ChangeEvent<HTMLInputElement>, cb: any) => {
   e.preventDefault();
@@ -54,16 +54,20 @@ const handleFileText = (markdown: string) => {
   return slides;
 };
 
-function App() {
-  const [slideIndex, setSlideIndex] = useState(0);
+const translateAxis = "X";
+
+export default function App() {
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+  const [subSlideIndex, setSubSlideIndex] = useState(0);
   const [slides, setSlides] = useState<any>([]);
   const [error, setError] = useState<string | null>(null);
-  const { subSlideIndex, setSubSlideIndex } = useSlideContext();
-
-  const markdown = useMarkdownContent(slides, slideIndex);
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const fileError = showFile(e, (res: any) => {
+      res.forEach((slide: any) => {
+        const md = processMarkdownContent(slide.content);
+        slide.markdown = md;
+      });
       console.log(res);
       setSlides(res);
     });
@@ -72,8 +76,7 @@ function App() {
 
   const changeSlideIndexByValue = useCallback(
     (delta: number, skipSubs: boolean) => {
-      const highlightCount = slides[slideIndex].highlightCount;
-
+      const highlightCount = slides[currentSlideIndex].highlightCount;
       if (
         subSlideIndex + delta < highlightCount &&
         subSlideIndex + delta >= 0 &&
@@ -83,7 +86,7 @@ function App() {
           return prevIndex + delta;
         });
       } else {
-        setSlideIndex((prevIndex) => {
+        setCurrentSlideIndex((prevIndex) => {
           const newIndex = prevIndex + delta;
           if (newIndex < 0) return prevIndex;
           return newIndex;
@@ -91,7 +94,7 @@ function App() {
         setSubSlideIndex(0);
       }
     },
-    [slideIndex, slides, subSlideIndex, setSubSlideIndex],
+    [slides, currentSlideIndex, subSlideIndex, setSubSlideIndex],
   );
 
   useEffect(() => {
@@ -113,32 +116,36 @@ function App() {
     return () => window.removeEventListener("keyup", handleKeyUp);
   }, [changeSlideIndexByValue]);
 
-  return (
-    <main className="slides">
-      <section className="slide-content">
-        {slides.length < 1 ? (
-          <>
-            <h1>Slide with index {slideIndex}</h1>
-            <input
-              type="file"
-              onChange={handleChange}
-              name="presentation-file"
-              accept=".md"
-            />
-            {error !== null && <p>{error}</p>}
-          </>
-        ) : (
-          <div className="markdown-body">{markdown}</div>
-        )}
-      </section>
+  return slides.length < 1 ? (
+    <>
+      <h1>Slide with index {currentSlideIndex}</h1>
+      <input
+        type="file"
+        onChange={handleChange}
+        name="presentation-file"
+        accept=".md"
+      />
+      {error !== null && <p>{error}</p>}
+    </>
+  ) : (
+    <main
+      className="slides"
+      style={{
+        width: "100%",
+      }}
+    >
+      {slides.map((slide: any, idx: number) => {
+        return (
+          <Slide
+            key={`slide-${idx}`}
+            currentSlideIndex={currentSlideIndex}
+            content={slide.markdown}
+            slideIndex={idx}
+            subSlideIndex={subSlideIndex}
+            translateAxis={translateAxis}
+          />
+        );
+      })}
     </main>
-  );
-}
-
-export default function AppWithProvider() {
-  return (
-    <SlideProvider>
-      <App />
-    </SlideProvider>
   );
 }
