@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
+import Progress from "./Progress";
 import Slide from "./Slide";
 
 export interface ISlide {
@@ -62,25 +63,32 @@ const Presentation: React.FC<PresentationProps> = ({ slides }) => {
   }, [changeSlideIndexByValue]);
 
   return (
-    <main
-      className="slides"
-      style={{
-        width: "100%",
-      }}
-    >
-      {slides.map((slide: any, idx: number) => {
-        return (
-          <Slide
-            key={`slide-${idx}`}
-            currentSlideIndex={currentSlideIndex}
-            content={slide.markdown}
-            slideIndex={idx}
-            subSlideIndex={subSlideIndex}
-            translateAxis={translateAxis}
-          />
-        );
-      })}
-    </main>
+    <>
+      <main
+        className="slides"
+        style={{
+          width: "100%",
+        }}
+      >
+        {slides.map((slide: any, idx: number) => {
+          return (
+            <Slide
+              key={`slide-${idx}`}
+              currentSlideIndex={currentSlideIndex}
+              content={slide.markdown}
+              slideIndex={idx}
+              subSlideIndex={subSlideIndex}
+              translateAxis={translateAxis}
+            />
+          );
+        })}
+      </main>
+      <Progress
+        slides={slides}
+        currentSlideIndex={currentSlideIndex}
+        subSlideIndex={subSlideIndex}
+      />
+    </>
   );
 };
 
