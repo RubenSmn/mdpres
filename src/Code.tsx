@@ -10,6 +10,7 @@ import { useSlideContext } from "./SlideProvider";
 const Code: React.FC<any> = ({ children, data }) => {
   const lineOffset = 1;
   const { subSlideIndex } = useSlideContext();
+  const codeRef = useRef<HTMLElement>(null);
 
   const ranges = useMemo(() => {
     if (data === undefined || data.meta === undefined)
@@ -72,8 +73,12 @@ const Code: React.FC<any> = ({ children, data }) => {
   );
 
   useEffect(() => {
+    // set scroll to top if subSlideIndex is zero
+    if (subSlideIndex === 0 && codeRef.current) {
+      codeRef.current.scrollTop = 0;
+      return;
+    }
     // run the scroll handler when the subSlideIndex changes
-    if (subSlideIndex === 0) return;
     scrollSmoothHandler(ranges[subSlideIndex][0] - 1);
   }, [subSlideIndex, ranges, scrollSmoothHandler]);
 
@@ -84,6 +89,7 @@ const Code: React.FC<any> = ({ children, data }) => {
         display: "block",
         overflowY: "scroll",
       }}
+      ref={codeRef}
     >
       {children.map((line: React.ReactNode, idx: number) => {
         return (
