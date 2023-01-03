@@ -72,7 +72,7 @@ const Presentation: React.FC<PresentationProps> = ({ slides }) => {
           width: "100%",
         }}
       >
-        {slides.map((slide: any, idx: number) => {
+        {slides.map((slide: ISlide, idx: number) => {
           return (
             <Slide
               key={`slide-${idx}`}

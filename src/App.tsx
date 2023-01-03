@@ -60,7 +60,7 @@ export default function App() {
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const fileError = showFile(e, (res: ISlide[]) => {
-      res.forEach((slide: any) => {
+      res.forEach((slide: ISlide) => {
         const md = processMarkdownContent(slide.content);
         slide.markdown = md;
       });

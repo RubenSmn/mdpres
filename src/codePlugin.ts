@@ -1,5 +1,6 @@
 import { visit } from "unist-util-visit";
 import Prism from "prismjs";
+import { HastRoot } from "remark-rehype/lib";
 
 const specialChars: { [key: string]: string } = {
   amp: "&",
@@ -10,7 +11,7 @@ const specialChars: { [key: string]: string } = {
 };
 
 export const codePlugin: any = () => {
-  return function transformer(tree: any) {
+  return function transformer(tree: HastRoot) {
     const tokenize = (node: any) => {
       if (node.tagName !== "code") return;
 
