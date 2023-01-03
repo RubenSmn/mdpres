@@ -49,6 +49,17 @@ body {
   align-items: center;
 }
 
+.markdown-body pre {
+  padding: 0;
+  display: inline-block;
+}
+
+.markdown-body pre code {
+  padding-right: 1rem;
+  margin: 1rem;
+  margin-right: 0;
+}
+
 code > span > span {
   height: 24px;
   line-height: 24px;
