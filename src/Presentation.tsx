@@ -3,7 +3,7 @@ import Slide from "./Slide";
 
 export interface ISlide {
   content: string;
-  highlightCount: number;
+  subSlideCount: number;
   markdown?: React.ReactNode;
   title?: string;
 }
@@ -20,9 +20,9 @@ const Presentation: React.FC<PresentationProps> = ({ slides }) => {
 
   const changeSlideIndexByValue = useCallback(
     (delta: number, skipSubs: boolean) => {
-      const highlightCount = slides[currentSlideIndex].highlightCount;
+      const subSlideCount = slides[currentSlideIndex].subSlideCount;
       if (
-        subSlideIndex + delta < highlightCount &&
+        subSlideIndex + delta < subSlideCount &&
         subSlideIndex + delta >= 0 &&
         skipSubs === false
       ) {

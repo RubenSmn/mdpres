@@ -29,18 +29,18 @@ const handleFileText = (markdown: string) => {
   if (configs === null) return;
   for (let i = 0; i < configs.length; i++) {
     const config = configs[i];
-    const subslides = content[i].match(
-      /^```(?<language>\w+)(?: (?<highlights>.*))?$/m,
+    const codeBlockInformation = content[i].match(
+      /^```(?<language>\w+)(?: (?<subslides>.*))?$/m,
     );
 
-    // const language = subslides?.groups?.language;
-    const highlightsRaw = subslides?.groups?.highlights || "";
+    // const language = codeBlockInformation?.groups?.language;
+    const subSlides = codeBlockInformation?.groups?.subslides || "";
 
-    const highlights = highlightsRaw.split("|").length;
+    const subSlideCount = subSlides.split("|").length;
 
     const data: { [key: string]: string | number } = {
       content: content[i],
-      highlightCount: highlights,
+      subSlideCount: subSlideCount,
     };
     const lines = config.trim().split(/\n\r?/);
     for (const line of lines) {
