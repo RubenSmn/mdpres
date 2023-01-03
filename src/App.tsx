@@ -89,6 +89,7 @@ export default function App() {
         setCurrentSlideIndex((prevIndex) => {
           const newIndex = prevIndex + delta;
           if (newIndex < 0) return prevIndex;
+          if (newIndex > slides.length - 1) return prevIndex;
           return newIndex;
         });
         setSubSlideIndex(0);
