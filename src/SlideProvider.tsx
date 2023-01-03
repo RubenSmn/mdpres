@@ -2,25 +2,26 @@ import React, { createContext, useContext, useState } from "react";
 
 interface SlideProviderProps {
   children: React.ReactNode;
+  value: {
+    subSlideIndex: number;
+  };
 }
 
 type SlidesContextType = {
   subSlideIndex: number;
-  setSubSlideIndex: React.Dispatch<React.SetStateAction<number>>;
+  // setSubSlideIndex: React.Dispatch<React.SetStateAction<number>>;
 };
 
 export const SlidesContext = createContext<SlidesContextType>({
   subSlideIndex: 0,
-  setSubSlideIndex: () => console.warn("No Slide Provider"),
+  // setSubSlideIndex: () => console.warn("No Slide Provider"),
 });
 
-const SlideProvider: React.FC<SlideProviderProps> = ({ children }) => {
-  const [subSlideIndex, setSubSlideIndex] = useState<number>(0);
+const SlideProvider: React.FC<SlideProviderProps> = ({ children, value }) => {
+  // const [subSlideIndex, setSubSlideIndex] = useState<number>(0);
 
   return (
-    <SlidesContext.Provider value={{ subSlideIndex, setSubSlideIndex }}>
-      {children}
-    </SlidesContext.Provider>
+    <SlidesContext.Provider value={value}>{children}</SlidesContext.Provider>
   );
 };
 
