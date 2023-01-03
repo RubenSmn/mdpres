@@ -1,8 +1,15 @@
 import React, { useCallback, useEffect, useState } from "react";
 import Slide from "./Slide";
 
+export interface ISlide {
+  content: string;
+  highlightCount: number;
+  markdown?: React.ReactNode;
+  title?: string;
+}
+
 interface PresentationProps {
-  slides: any;
+  slides: ISlide[];
 }
 
 const translateAxis = "X";

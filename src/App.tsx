@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { processMarkdownContent } from "./hooks";
-import Presentation from "./Presentation";
+import Presentation, { ISlide } from "./Presentation";
 
 const showFile = (e: React.ChangeEvent<HTMLInputElement>, cb: any) => {
   e.preventDefault();
@@ -55,11 +55,11 @@ const handleFileText = (markdown: string) => {
 };
 
 export default function App() {
-  const [slides, setSlides] = useState<any>([]);
+  const [slides, setSlides] = useState<ISlide[]>([]);
   const [error, setError] = useState<string | null>(null);
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const fileError = showFile(e, (res: any) => {
+    const fileError = showFile(e, (res: ISlide[]) => {
       res.forEach((slide: any) => {
         const md = processMarkdownContent(slide.content);
         slide.markdown = md;
