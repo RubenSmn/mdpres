@@ -20,8 +20,8 @@ const showFile = (e: React.ChangeEvent<HTMLInputElement>, cb: any) => {
 };
 
 const handleFileText = (markdown: string) => {
-  const configs = markdown.match(/(?<=---\n)[\w\s\:\-\=\+]*(?=---\n\n?)/g);
-  const content = markdown.split(/---[\w\s\:\-\=\+]*---\n\n?/g);
+  const configs = markdown.match(/(?<=---\n)[\w\s\:\-\=\+\.\_]*(?=---\n\n?)/g);
+  const content = markdown.split(/---[\w\s\:\-\=\+\.\_]*---\n\n?/g);
   content.shift();
 
   const slides = [];
