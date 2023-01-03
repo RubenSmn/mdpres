@@ -48,9 +48,11 @@ const Presentation: React.FC<PresentationProps> = ({ slides }) => {
       switch (e.key) {
         case "ArrowLeft":
           changeSlideIndexByValue(-1, e.shiftKey);
+          document.getSelection()?.removeAllRanges();
           break;
         case "ArrowRight":
           changeSlideIndexByValue(1, e.shiftKey);
+          document.getSelection()?.removeAllRanges();
           break;
         default:
           break;
