@@ -60,11 +60,9 @@ const Code: React.FC<any> = ({ children, data }) => {
   const scrollSmoothHandler = useCallback(
     (index: number) => {
       if (scrollRefs.current.length < 1) return;
-      const centerIndex = Math.floor(index / 2);
-      if (centerIndex > 1 && rangeDiff < visibleLineCount)
-        index = index + centerIndex - 1;
+      const centerIndex = Math.floor(rangeDiff / 2) + index;
 
-      scrollRefs.current[index].current?.scrollIntoView({
+      scrollRefs.current[centerIndex].current?.scrollIntoView({
         behavior: "smooth",
         // if there are less than 4 lines in the range then just center
         block: rangeDiff < visibleLineCount ? "center" : "start",
