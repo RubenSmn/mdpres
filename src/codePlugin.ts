@@ -37,7 +37,7 @@ export const codePlugin: any = () => {
 
         // wrap the whitespaces into a span
         const newLine = highlightedLine.replace(
-          /\s+(?=\<)/g,
+          /\s+(?=\<)|^\s+/g,
           (match: string) => {
             return `<span>${match}</span>`;
           },
