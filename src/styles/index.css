@@ -1,0 +1,16 @@
+@import "./../../node_modules/github-markdown-css/github-markdown.css";
+@import "./../../node_modules/prismjs/themes/prism-okaidia.min.css";
+/* @import "./../node_modules/prismjs/themes/prism-solarizedlight.min.css"; */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: #e6e6e6;
+}

@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import ControlButtons from "./ControlButtons";
 import Progress from "./Progress";
 import Slide from "./Slide";
+import "./styles/presentation.css";
 
 export interface ISlide {
   content: string;
