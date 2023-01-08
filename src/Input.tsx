@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { processMarkdownContent } from "./hooks";
 import { ISlide } from "./Presentation";
-import { processMarkdownFile } from "./utils/markdown";
+import { processMarkdownFile, markdownToReact } from "./utils";
 
 interface InputProps {
   setSlides: React.Dispatch<React.SetStateAction<ISlide[]>>;
@@ -33,8 +32,8 @@ const Input: React.FC<InputProps> = ({ setSlides }) => {
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const fileError = readMarkdownFile(e, (res: ISlide[]) => {
       res.forEach((slide: ISlide) => {
-        const md = processMarkdownContent(slide.content);
-        slide.markdown = md;
+        const markdownAsReact = markdownToReact(slide.content);
+        slide.markdown = markdownAsReact;
       });
       console.log(res);
       setSlides(res);
