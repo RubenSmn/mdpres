@@ -18,9 +18,9 @@ const Slide: React.FC<SlideProps> = ({
 }) => {
   let translateValue = "100%";
 
-  if (currentSlideIndex - 1 === slideIndex) {
+  if (currentSlideIndex > slideIndex) {
     translateValue = "-100%";
-  } else if (currentSlideIndex + 1 === slideIndex) {
+  } else if (currentSlideIndex < slideIndex) {
     translateValue = "100%";
   } else if (currentSlideIndex === slideIndex) {
     translateValue = "0%";
