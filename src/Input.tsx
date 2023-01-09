@@ -43,12 +43,18 @@ const Input: React.FC<InputProps> = ({ setSlides }) => {
 
   return (
     <>
-      <input
-        type="file"
-        onChange={handleChange}
-        name="presentation-file"
-        accept=".md"
-      />
+      <div>
+        <label className="button-upload" htmlFor="fileUploadInput">
+          Upload File
+        </label>
+        <input
+          id="fileUploadInput"
+          type="file"
+          onChange={handleChange}
+          name="presentation-file"
+          accept=".md"
+        />
+      </div>
       {error !== null && <p>{error}</p>}
     </>
   );
