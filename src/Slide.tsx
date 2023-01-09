@@ -32,14 +32,14 @@ const Slide: React.FC<SlideProps> = ({
         subSlideIndex: currentSlideIndex === slideIndex ? subSlideIndex : 0,
       }}
     >
-      <section
+      <div
         className="slide"
         style={{
           transform: `translate${translateAxis}(${translateValue})`,
         }}
       >
         <div className="markdown-body">{content}</div>
-      </section>
+      </div>
     </SlideProvider>
   );
 };

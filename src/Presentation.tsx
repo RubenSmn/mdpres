@@ -68,7 +68,7 @@ const Presentation: React.FC<PresentationProps> = ({ slides }) => {
 
   return (
     <>
-      <main className="slides">
+      <div className="slides">
         {slides.map((slide: ISlide, idx: number) => {
           return (
             <Slide
@@ -81,7 +81,7 @@ const Presentation: React.FC<PresentationProps> = ({ slides }) => {
             />
           );
         })}
-      </main>
+      </div>
       <ControlButtons
         onLeftClick={() => changeSlideIndexByValue(-1, false)}
         onRightClick={() => changeSlideIndexByValue(1, false)}
