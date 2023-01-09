@@ -68,12 +68,7 @@ const Presentation: React.FC<PresentationProps> = ({ slides }) => {
 
   return (
     <>
-      <main
-        className="slides"
-        style={{
-          width: "100%",
-        }}
-      >
+      <main className="slides">
         {slides.map((slide: ISlide, idx: number) => {
           return (
             <Slide
