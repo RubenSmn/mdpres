@@ -69,7 +69,7 @@ const Preview: React.FC<PreviewProps> = ({ startPresenting, slides }) => {
   return (
     <section>
       <h3>Slide Preview</h3>
-      <button className="button-start-presenting" onClick={startPresenting}>
+      <button className="button" onClick={startPresenting}>
         Start Presenting
       </button>
       <div className="slides-preview">

@@ -57,7 +57,7 @@ section input[type="file"] {
   width: 0;
 }
 
-.button-start-presenting {
+.button {
   display: block;
   padding: 0.8rem 1rem;
   cursor: pointer;
@@ -70,22 +70,6 @@ section input[type="file"] {
   transition: background-color 150ms ease-in;
 }
 
-.button-start-presenting:hover {
-  background-color: var(--darkestBlue);
-}
-
-.button-upload {
-  display: inline-block;
-  padding: 0.8rem 1rem;
-  cursor: pointer;
-  border-radius: 0.5rem;
-  background-color: var(--darkBlue);
-  font-size: 1rem;
-  font-weight: bold;
-  color: white;
-  transition: background-color 150ms ease-in;
-}
-
-.button-upload:hover {
+.button:hover {
   background-color: var(--darkestBlue);
 }

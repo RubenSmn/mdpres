@@ -44,7 +44,7 @@ const Input: React.FC<InputProps> = ({ setSlides }) => {
   return (
     <>
       <div>
-        <label className="button-upload" htmlFor="fileUploadInput">
+        <label className="button" htmlFor="fileUploadInput">
           Upload File
         </label>
         <input
