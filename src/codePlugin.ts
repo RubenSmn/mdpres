@@ -128,14 +128,21 @@ export const codePlugin: any = () => {
         node.data !== null &&
         node.data.meta !== null
       ) {
-        const codeBlockInformation = node.data.meta.match(
-          /\((?<lineOffset>\d+)\)/m,
-        );
-        const lineOffset = codeBlockInformation?.groups?.lineOffset || "1";
+        const data = node.data.meta;
+
+        const lineOffset = data.match(/(?<=\()\d+(?=\))/g);
+        const ranges = data.match(/(?<=^| )[\,\|\-0-9]+/g)[0];
+
+        const formattedRanges = ranges.split("|").map((subSlide: string) => {
+          // if the subslides start with |2-4|... then the initial slide should show all
+          if (subSlide === "") return [1, Infinity];
+          return subSlide.split("-").map((point: string) => parseInt(point));
+        });
 
         node.properties["data"] = {
           ...node.data,
           lineOffset: parseInt(lineOffset),
+          ranges: formattedRanges,
         };
       }
     };

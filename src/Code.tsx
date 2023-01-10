@@ -9,20 +9,9 @@ import { useSlideContext } from "./SlideProvider";
 
 const Code: React.FC<any> = ({ children, data }) => {
   const lineOffset = data?.lineOffset || 1;
+  const ranges = useMemo(() => data?.ranges || [[1, Infinity]], [data?.ranges]);
   const { subSlideIndex } = useSlideContext();
   const codeRef = useRef<HTMLElement>(null);
-
-  const ranges = useMemo(() => {
-    if (data === undefined || data.meta === undefined)
-      return [[1, children.length]];
-
-    const newRanges = data.meta.split("|").map((subSlide: string) => {
-      // if the subslides start with |2-4|... then the initial slide should show all
-      if (subSlide === "") return [1, children.length];
-      return subSlide.split("-").map((point: string) => parseInt(point));
-    });
-    return newRanges;
-  }, [children.length, data]);
 
   const isInRange = (value: number) => {
     const currentRange = ranges[subSlideIndex];
