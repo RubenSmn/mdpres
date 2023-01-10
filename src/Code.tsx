@@ -8,7 +8,7 @@ import React, {
 import { useSlideContext } from "./SlideProvider";
 
 const Code: React.FC<any> = ({ children, data }) => {
-  const lineOffset = 1;
+  const lineOffset = data?.lineOffset || 1;
   const { subSlideIndex } = useSlideContext();
   const codeRef = useRef<HTMLElement>(null);
 
@@ -92,9 +92,15 @@ const Code: React.FC<any> = ({ children, data }) => {
       ref={codeRef}
     >
       {children.map((line: React.ReactNode, idx: number) => {
+        // subtract lineOffset since subSlideIndex does not change
+        // add one since linenumbers always start at 1 instead of 0
+        const inRangeIndex = idx - lineOffset + 1;
         return (
           <span
-            className={["code-line", !isInRange(idx) && "blurred"].join(" ")}
+            className={[
+              "code-line",
+              !isInRange(inRangeIndex) && "blurred",
+            ].join(" ")}
             key={`line-${idx}`}
             ref={scrollRefs.current[idx]}
           >

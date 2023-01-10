@@ -123,8 +123,21 @@ export const codePlugin: any = () => {
       // set the newNodeChildren to the node's children
       node.children = newNodeChildren;
 
-      if (node.data !== null || node.data !== undefined)
-        node.properties["data"] = node.data;
+      if (
+        node.data !== undefined &&
+        node.data !== null &&
+        node.data.meta !== null
+      ) {
+        const codeBlockInformation = node.data.meta.match(
+          /\((?<lineOffset>\d+)\)/m,
+        );
+        const lineOffset = codeBlockInformation?.groups?.lineOffset || "1";
+
+        node.properties["data"] = {
+          ...node.data,
+          lineOffset: parseInt(lineOffset),
+        };
+      }
     };
 
     visit(tree, "element", tokenize);

@@ -9,7 +9,7 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde esse rem quam id
 voluptate suscipit fuga necessitatibus doloremque magnam, itaque autem illum in
 earum at consectetur distinctio. Suscipit, eligendi fugit.
 
-```js |3|5-7|9-11|13-19
+```js |3|5-7|9-11|13-19 (11)
 const changeSlideIndexByValue = useCallback(
   (delta: number, skipSubs: boolean) => {
     const subSlideCount = slides[currentSlideIndex].subSlideCount;
