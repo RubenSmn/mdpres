@@ -9,17 +9,13 @@ interface SlideProviderProps {
 
 type SlidesContextType = {
   subSlideIndex: number;
-  // setSubSlideIndex: React.Dispatch<React.SetStateAction<number>>;
 };
 
 export const SlidesContext = createContext<SlidesContextType>({
   subSlideIndex: 0,
-  // setSubSlideIndex: () => console.warn("No Slide Provider"),
 });
 
 const SlideProvider: React.FC<SlideProviderProps> = ({ children, value }) => {
-  // const [subSlideIndex, setSubSlideIndex] = useState<number>(0);
-
   return (
     <SlidesContext.Provider value={value}>{children}</SlidesContext.Provider>
   );
