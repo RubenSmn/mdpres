@@ -26,7 +26,7 @@ header a {
 section {
   height: 100vh;
   margin: 0 auto;
-  padding-top: 5rem;
+  padding-top: 6rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -41,15 +41,37 @@ body > div > section:first-of-type {
   box-shadow: inset 0px 4rem 3px rgba(0, 0, 0, 0.2);
 }
 
-section h1 {
+section h1,
+h3 {
   color: white;
   font-size: 2rem;
+}
+
+section h3 {
+  font-size: 1.6rem;
 }
 
 section input[type="file"] {
   visibility: hidden;
   height: 0;
   width: 0;
+}
+
+.button-start-presenting {
+  display: block;
+  padding: 0.8rem 1rem;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  background-color: var(--darkBlue);
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  border: none;
+  transition: background-color 150ms ease-in;
+}
+
+.button-start-presenting:hover {
+  background-color: var(--darkestBlue);
 }
 
 .button-upload {
@@ -61,4 +83,9 @@ section input[type="file"] {
   font-size: 1rem;
   font-weight: bold;
   color: white;
+  transition: background-color 150ms ease-in;
+}
+
+.button-upload:hover {
+  background-color: var(--darkestBlue);
 }

@@ -35,13 +35,10 @@ export default function App() {
           <Input setSlides={setSlides} />
         </section>
       ) : (
-        <section>
-          <h3>Preview the slides</h3>
-          <Preview
-            startPresenting={() => setStartPresenting(true)}
-            slides={slides}
-          />
-        </section>
+        <Preview
+          startPresenting={() => setStartPresenting(true)}
+          slides={slides}
+        />
       )}
     </>
   ) : (

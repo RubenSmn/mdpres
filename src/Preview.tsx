@@ -67,9 +67,11 @@ const Preview: React.FC<PreviewProps> = ({ startPresenting, slides }) => {
   }, [changeSlideIndexByValue]);
 
   return (
-    <>
-      <p>Here is the preview</p>
-      <button onClick={startPresenting}>Start Presenting</button>
+    <section>
+      <h3>Slide Preview</h3>
+      <button className="button-start-presenting" onClick={startPresenting}>
+        Start Presenting
+      </button>
       <div className="slides-preview">
         {slides.map((slide: ISlide, idx: number) => {
           return (
@@ -90,7 +92,7 @@ const Preview: React.FC<PreviewProps> = ({ startPresenting, slides }) => {
           );
         })}
       </div>
-    </>
+    </section>
   );
 };
 
