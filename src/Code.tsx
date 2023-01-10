@@ -84,12 +84,13 @@ const Code: React.FC<any> = ({ children, data }) => {
         // subtract lineOffset since subSlideIndex does not change
         // add one since linenumbers always start at 1 instead of 0
         const inRangeIndex = idx - lineOffset + 1;
+        const className = `code-line${
+          !isInRange(inRangeIndex) ? " blurred" : ""
+        }`;
+
         return (
           <span
-            className={[
-              "code-line",
-              !isInRange(inRangeIndex) && "blurred",
-            ].join(" ")}
+            className={className}
             key={`line-${idx}`}
             ref={scrollRefs.current[idx]}
           >
