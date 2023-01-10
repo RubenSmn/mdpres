@@ -12,6 +12,18 @@ export const useSlideKeyHandler = (
         case "ArrowRight":
           callback(1, e.shiftKey);
           break;
+        case "h":
+          callback(-1, e.shiftKey);
+          break;
+        case "l":
+          callback(1, e.shiftKey);
+          break;
+        case "k":
+          callback(-1, e.shiftKey);
+          break;
+        case "j":
+          callback(1, e.shiftKey);
+          break;
         default:
           break;
       }
