@@ -12,6 +12,7 @@ body {
   width: 50vw;
   height: 100%;
   margin: 1rem auto 0;
+  padding-bottom: 30vh;
   display: flex;
   flex-direction: column;
   align-items: center;
