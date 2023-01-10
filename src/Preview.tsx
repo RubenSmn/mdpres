@@ -83,7 +83,7 @@ const Preview: React.FC<PreviewProps> = ({ startPresenting, slides }) => {
                   currentSlideIndex === idx ? " active" : ""
                 }`}
               >
-                {idx}
+                {idx + 1}
               </span>
               <div className="markdown-body">{slide.markdown}</div>
             </div>
