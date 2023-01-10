@@ -20,13 +20,6 @@ export default function App() {
           >
             Github
           </a>
-          <a
-            href="https://github.com/RubenSmn"
-            target={"_blank"}
-            rel="noreferrer"
-          >
-            👋 I made this
-          </a>
         </div>
       </header>
       {slides.length < 1 ? (
