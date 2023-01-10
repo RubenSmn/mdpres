@@ -89,6 +89,7 @@ code > span > span {
   display: flex;
   position: relative;
   padding-left: 2rem;
+  margin-right: 1rem;
   transition: filter 200ms ease-in;
 }
 
