@@ -5,8 +5,8 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { useSlideKeyHandler } from "./hooks/useSlideNavigation";
 import { ISlide } from "./Presentation";
-import Slide from "./Slide";
 
 interface PreviewProps {
   startPresenting: () => void;
@@ -31,6 +31,8 @@ const Preview: React.FC<PreviewProps> = ({ startPresenting, slides }) => {
     [slides.length],
   );
 
+  useSlideKeyHandler(changeSlideIndexByValue);
+
   const scrollSmoothHandler = useCallback(
     (index: number) => {
       if (scrollRefs.current.length < 1) return;
@@ -46,25 +48,6 @@ const Preview: React.FC<PreviewProps> = ({ startPresenting, slides }) => {
   useEffect(() => {
     scrollSmoothHandler(currentSlideIndex);
   }, [currentSlideIndex, scrollSmoothHandler]);
-
-  useEffect(() => {
-    const handleKeyUp = (e: KeyboardEvent) => {
-      switch (e.key) {
-        case "ArrowLeft":
-          changeSlideIndexByValue(-1);
-          break;
-        case "ArrowRight":
-          changeSlideIndexByValue(1);
-          break;
-        default:
-          break;
-      }
-    };
-
-    window.addEventListener("keyup", handleKeyUp);
-
-    return () => window.removeEventListener("keyup", handleKeyUp);
-  }, [changeSlideIndexByValue]);
 
   return (
     <section>

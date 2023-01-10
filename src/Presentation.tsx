@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import ControlButtons from "./ControlButtons";
+import { useSlideKeyHandler } from "./hooks/useSlideNavigation";
 import Progress from "./Progress";
 import Slide from "./Slide";
 import "./styles/presentation.css";
@@ -45,26 +46,7 @@ const Presentation: React.FC<PresentationProps> = ({ slides }) => {
     [slides, currentSlideIndex, subSlideIndex, setSubSlideIndex],
   );
 
-  useEffect(() => {
-    const handleKeyUp = (e: KeyboardEvent) => {
-      switch (e.key) {
-        case "ArrowLeft":
-          changeSlideIndexByValue(-1, e.shiftKey);
-          document.getSelection()?.removeAllRanges();
-          break;
-        case "ArrowRight":
-          changeSlideIndexByValue(1, e.shiftKey);
-          document.getSelection()?.removeAllRanges();
-          break;
-        default:
-          break;
-      }
-    };
-
-    window.addEventListener("keyup", handleKeyUp);
-
-    return () => window.removeEventListener("keyup", handleKeyUp);
-  }, [changeSlideIndexByValue]);
+  useSlideKeyHandler(changeSlideIndexByValue);
 
   return (
     <>
