@@ -38,7 +38,9 @@ export const processMarkdownFile = (markdown: string) => {
     };
     const lines = config.trim().split(/\n\r?/);
     for (const line of lines) {
-      const groups = /(?<prop>\w+): ?(?<value>[\w\s]+)$/gm.exec(line)?.groups;
+      const groups = /(?<prop>\w+): ?(?<value>[\w\s\:\-\=\+\.\_]+)$/gm.exec(
+        line,
+      )?.groups;
       if (!groups) continue;
       data[groups.prop] = groups.value;
     }
