@@ -5,6 +5,7 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { SizeTable } from "./constants";
 import { useSlideKeyHandler } from "./hooks/useSlideNavigation";
 import { ISlide } from "./interfaces/ISlide";
 
@@ -61,6 +62,9 @@ const Preview: React.FC<PreviewProps> = ({ startPresenting, slides }) => {
             <div
               key={`preview-slide-${idx}`}
               className="slide"
+              style={{
+                width: SizeTable[slide.size] || 992,
+              }}
               ref={scrollRefs.current[idx]}
             >
               <span

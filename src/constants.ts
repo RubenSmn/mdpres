@@ -7,3 +7,10 @@ export const sanitizeSchema: Partial<typeof defaultSchema> = {
     code: [...(defaultSchema.attributes?.code || []), ["className"], ["data"]],
   },
 };
+
+export const SizeTable = {
+  xs: 320,
+  sm: 768,
+  md: 1224,
+  xl: 1824,
+};

@@ -1,6 +1,7 @@
 ---
 title: Some title
 background: yellow
+size: sm
 ---
 
 # Super awesome title

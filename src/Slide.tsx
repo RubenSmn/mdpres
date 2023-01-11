@@ -1,4 +1,5 @@
 import React from "react";
+import { SizeTable } from "./constants";
 import SlideProvider from "./SlideProvider";
 
 interface SlideProps {
@@ -7,6 +8,7 @@ interface SlideProps {
   slideIndex: number;
   subSlideIndex: number;
   translateAxis: string;
+  size: keyof typeof SizeTable;
 }
 
 const Slide: React.FC<SlideProps> = ({
@@ -15,6 +17,7 @@ const Slide: React.FC<SlideProps> = ({
   slideIndex,
   subSlideIndex,
   translateAxis,
+  size,
 }) => {
   let translateValue = "100%";
 
@@ -38,7 +41,15 @@ const Slide: React.FC<SlideProps> = ({
           transform: `translate${translateAxis}(${translateValue})`,
         }}
       >
-        <div className="markdown-body">{content}</div>
+        <div className="markdown-body">
+          <div
+            style={{
+              width: SizeTable[size],
+            }}
+          >
+            {content}
+          </div>
+        </div>
       </div>
     </SlideProvider>
   );
