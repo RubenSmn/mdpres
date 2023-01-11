@@ -47,7 +47,6 @@ const NoteWindow: React.FC<NoteWindowProps> = ({
     }
   }, [container]);
 
-  console.log(notes);
   if (container !== null) {
     const notesElement =
       notes.length > 0 ? (
