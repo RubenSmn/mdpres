@@ -3,4 +3,5 @@ export interface ISlide {
   subSlideCount: number;
   markdown?: React.ReactNode;
   title?: string;
+  notes: string[];
 }

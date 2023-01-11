@@ -1,3 +1,5 @@
+import { ISlide } from "../interfaces/ISlide";
+
 export const processMarkdownFile = (markdown: string) => {
   const configs = markdown.match(/(?<=---\n)[\w\s\:\-\=\+\.\_]*(?=---\n\n?)/g);
   const content = markdown.split(/---[\w\s\:\-\=\+\.\_]*---\n\n?/g);
@@ -12,14 +14,27 @@ export const processMarkdownFile = (markdown: string) => {
       /^```(?<language>\w+)(?: (?<subslides>.*))?$/m,
     );
 
+    const notes: string[] = [];
+
+    // remove all notes from the content
+    content[i] = content[i].replace(
+      /\n^\[note\]: ?(?<note>.*$)\n\n?/gm,
+      (_, note) => {
+        // add the actual note to the notes array
+        notes.push(note);
+        return "";
+      },
+    );
+
     // const language = codeBlockInformation?.groups?.language;
     const subSlides = codeBlockInformation?.groups?.subslides || "";
 
     const subSlideCount = subSlides.split("|").length;
 
-    const data: { [key: string]: string | number } = {
+    const data: ISlide = {
       content: content[i],
       subSlideCount: subSlideCount,
+      notes: notes,
     };
     const lines = config.trim().split(/\n\r?/);
     for (const line of lines) {

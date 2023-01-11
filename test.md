@@ -9,6 +9,8 @@ Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde esse rem quam id
 voluptate suscipit fuga necessitatibus doloremque magnam, itaque autem illum in
 earum at consectetur distinctio. Suscipit, eligendi fugit.
 
+[note]: First note
+
 ```js |3|5-7|9-11|13-19 (11)
 const changeSlideIndexByValue = useCallback(
   (delta: number, skipSubs: boolean) => {
@@ -53,6 +55,8 @@ earum at consectetur distinctio. Suscipit, eligendi fugit.
 }
 ```
 
+[note]: Some note in between
+
 ---
 title: Yes Yes
 ---
@@ -67,3 +71,5 @@ Some content right here from me :+1:
   background-color: black;
 }
 ```
+
+[note]: Last note of the slides
