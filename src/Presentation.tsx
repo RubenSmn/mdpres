@@ -2,6 +2,7 @@ import React, { useCallback, useState } from "react";
 import ControlButtons from "./ControlButtons";
 import { useSlideKeyHandler } from "./hooks/useSlideNavigation";
 import { ISlide } from "./interfaces/ISlide";
+import NoteWindow from "./NoteWindow";
 import Progress from "./Progress";
 import Slide from "./Slide";
 import "./styles/presentation.css";
@@ -67,6 +68,7 @@ const Presentation: React.FC<PresentationProps> = ({ slides }) => {
         currentSlideIndex={currentSlideIndex}
         subSlideIndex={subSlideIndex}
       />
+      <NoteWindow notes={slides[currentSlideIndex].notes} />
     </>
   );
 };
