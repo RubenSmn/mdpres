@@ -6,9 +6,15 @@ import { copyDocumentStyles } from "./utils";
 
 interface NoteWindowProps {
   notes: ISlide["notes"];
+  slideIndex: number;
+  slideTitle: string;
 }
 
-const NoteWindow: React.FC<NoteWindowProps> = ({ notes }) => {
+const NoteWindow: React.FC<NoteWindowProps> = ({
+  notes,
+  slideIndex,
+  slideTitle,
+}) => {
   const [container, setContainer] = useState<HTMLDivElement | null>(null);
   const noteWindow = useRef<Window | null>(null);
 
@@ -54,7 +60,12 @@ const NoteWindow: React.FC<NoteWindowProps> = ({ notes }) => {
         <p>No notes</p>
       );
     return createPortal(
-      <div className="slide-notes">{notesElement}</div>,
+      <div className="slide-notes">
+        <span className="slide-number">
+          {slideIndex} - {slideTitle}
+        </span>
+        {notesElement}
+      </div>,
       container,
     );
   }

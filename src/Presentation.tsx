@@ -68,7 +68,11 @@ const Presentation: React.FC<PresentationProps> = ({ slides }) => {
         currentSlideIndex={currentSlideIndex}
         subSlideIndex={subSlideIndex}
       />
-      <NoteWindow notes={slides[currentSlideIndex].notes} />
+      <NoteWindow
+        notes={slides[currentSlideIndex].notes}
+        slideIndex={currentSlideIndex}
+        slideTitle={slides[currentSlideIndex].title || "No Slide title"}
+      />
     </>
   );
 };
