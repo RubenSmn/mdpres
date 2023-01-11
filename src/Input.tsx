@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ISlide } from "./Presentation";
+import { ISlide } from "./interfaces/ISlide";
 import { processMarkdownFile, markdownToReact } from "./utils";
 
 interface InputProps {

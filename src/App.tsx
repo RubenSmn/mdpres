@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Input from "./Input";
-import Presentation, { ISlide } from "./Presentation";
+import { ISlide } from "./interfaces/ISlide";
+import Presentation from "./Presentation";
 import Preview from "./Preview";
 import "./styles/home.css";
 

@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { ISlide } from "./Presentation";
+import { ISlide } from "./interfaces/ISlide";
 
 interface ProgressProps {
   currentSlideIndex: number;

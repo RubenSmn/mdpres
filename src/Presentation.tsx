@@ -1,16 +1,10 @@
 import React, { useCallback, useEffect, useState } from "react";
 import ControlButtons from "./ControlButtons";
 import { useSlideKeyHandler } from "./hooks/useSlideNavigation";
+import { ISlide } from "./interfaces/ISlide";
 import Progress from "./Progress";
 import Slide from "./Slide";
 import "./styles/presentation.css";
-
-export interface ISlide {
-  content: string;
-  subSlideCount: number;
-  markdown?: React.ReactNode;
-  title?: string;
-}
 
 interface PresentationProps {
   slides: ISlide[];

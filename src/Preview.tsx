@@ -6,7 +6,7 @@ import React, {
   useState,
 } from "react";
 import { useSlideKeyHandler } from "./hooks/useSlideNavigation";
-import { ISlide } from "./Presentation";
+import { ISlide } from "./interfaces/ISlide";
 
 interface PreviewProps {
   startPresenting: () => void;
