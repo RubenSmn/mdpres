@@ -94,7 +94,7 @@ const Code: React.FC<any> = ({ children, data }) => {
             key={`line-${idx}`}
             ref={scrollRefs.current[idx]}
           >
-            <span className="code-line line-number">{idx + lineOffset}</span>
+            <span className="line-number">{idx + lineOffset}</span>
             {line}
           </span>
         );

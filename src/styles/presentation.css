@@ -105,6 +105,11 @@ code > span > span {
   /* border-right: 2px solid rgba(0, 0, 0, 0.3); */
 }
 
+.code-line .code {
+  display: flex;
+  margin-left: 2rem;
+}
+
 .code-line.blurred {
   filter: blur(0.07rem);
 }

@@ -111,7 +111,7 @@ export const codePlugin: any = () => {
           type: "element",
           tagName: "span",
           properties: {
-            className: ["code-line"],
+            className: ["code"],
           },
           children: lineNodes,
         };
