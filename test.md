@@ -15,7 +15,7 @@ earum at consectetur distinctio. Suscipit, eligendi fugit.
 ```js |3|5-7|9-11|13-19 (11)
 const changeSlideIndexByValue = useCallback(
   (delta: number, skipSubs: boolean) => {
-    const subSlideCount = slides[currentSlideIndex].subSlideCount;
+    const subSlideCount = slides[currentSlideIndex].subSlideCount; // some ridiculous long comment which should either be a line above or below
     if (
       subSlideIndex + delta < subSlideCount &&
       subSlideIndex + delta >= 0 &&

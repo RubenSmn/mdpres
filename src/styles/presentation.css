@@ -79,7 +79,7 @@ body {
 }
 
 code > span > span {
-  height: 24px;
+  min-height: 24px;
   line-height: 24px;
   display: inline-flex;
   align-items: center;
@@ -107,7 +107,9 @@ code > span > span {
 
 .code-line .code {
   display: flex;
+  max-width: 712px;
   margin-left: 2rem;
+  flex-wrap: wrap;
 }
 
 .code-line.blurred {
