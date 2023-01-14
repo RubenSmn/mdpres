@@ -58,7 +58,7 @@ const Code: React.FC<any> = ({ children, data }) => {
         block: rangeDiff < visibleLineCount ? "center" : "start",
       });
     },
-    [scrollRefs, rangeDiff],
+    [scrollRefs, rangeDiff, visibleLineCount],
   );
 
   useEffect(() => {
@@ -76,7 +76,13 @@ const Code: React.FC<any> = ({ children, data }) => {
       scrollSmoothHandler(ranges[subSlideIndex][0] - 1);
     }, 250); // the time of the 'code-line' transition
     return () => clearTimeout(timeout);
-  }, [children.length, subSlideIndex, ranges, scrollSmoothHandler]);
+  }, [
+    children.length,
+    visibleLineCount,
+    subSlideIndex,
+    ranges,
+    scrollSmoothHandler,
+  ]);
 
   return (
     <code
