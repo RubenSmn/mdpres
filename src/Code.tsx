@@ -62,6 +62,9 @@ const Code: React.FC<any> = ({ children, data }) => {
   );
 
   useEffect(() => {
+    // if there not more children than can be visible no need to run scrollIntoView
+    if (children.length <= visibleLineCount) return;
+
     // set scroll to top if subSlideIndex is zero
     if (subSlideIndex === 0 && codeRef.current) {
       codeRef.current.scrollTop = 0;
@@ -73,7 +76,7 @@ const Code: React.FC<any> = ({ children, data }) => {
       scrollSmoothHandler(ranges[subSlideIndex][0] - 1);
     }, 250); // the time of the 'code-line' transition
     return () => clearTimeout(timeout);
-  }, [subSlideIndex, ranges, scrollSmoothHandler]);
+  }, [children.length, subSlideIndex, ranges, scrollSmoothHandler]);
 
   return (
     <code
