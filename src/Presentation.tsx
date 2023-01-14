@@ -2,6 +2,7 @@ import React, { useCallback, useState } from "react";
 import ControlButtons from "./ControlButtons";
 import { useSlideKeyHandler } from "./hooks/useSlideNavigation";
 import { ISlide } from "./interfaces/ISlide";
+import Menu from "./Menu";
 import NoteWindow from "./NoteWindow";
 import Progress from "./Progress";
 import Slide from "./Slide";
@@ -43,6 +44,23 @@ const Presentation: React.FC<PresentationProps> = ({ slides }) => {
 
   useSlideKeyHandler(changeSlideIndexByValue);
 
+  const changeSlideIndex = (index: number) => {
+    setCurrentSlideIndex((prevIndex) => {
+      if (index < 0) return prevIndex;
+      if (index > slides.length - 1) return prevIndex;
+      return index;
+    });
+  };
+
+  const changeSubIndex = (index: number) => {
+    const subSlideCount = slides[currentSlideIndex].subSlideCount;
+    setSubSlideIndex((prevIndex) => {
+      if (index < 0) return 0;
+      if (index > subSlideCount) return prevIndex;
+      return index;
+    });
+  };
+
   return (
     <>
       <div className="slides">
@@ -73,6 +91,10 @@ const Presentation: React.FC<PresentationProps> = ({ slides }) => {
         notes={slides[currentSlideIndex].notes}
         slideIndex={currentSlideIndex}
         slideTitle={slides[currentSlideIndex].title || "No Slide title"}
+      />
+      <Menu
+        changeSlideIndex={changeSlideIndex}
+        changeSubIndex={changeSubIndex}
       />
     </>
   );

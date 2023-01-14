@@ -180,3 +180,43 @@ code > span > span {
   -moz-transform: rotate(135deg);
   -o-transform: rotate(135deg);
 }
+
+.menu {
+  position: absolute;
+  top: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  /* background-color: var(--blue); */
+  background: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+}
+
+.menu-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  /* background-color: rgba(0, 0, 0, 0.3); */
+  background-color: rgba(0, 0, 0, 0.48);
+  transition: background-color 600ms ease-in;
+}
+
+.menu form {
+  width: 100%;
+}
+
+.menu input {
+  height: 3rem;
+  width: 100%;
+  padding: 1rem;
+  border: none;
+  background-color: var(--blue);
+  color: white;
+  border-radius: 8px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
