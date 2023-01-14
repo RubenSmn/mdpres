@@ -9,6 +9,7 @@ import { useSlideContext } from "./SlideProvider";
 
 const Code: React.FC<any> = ({ children, data }) => {
   const lineOffset = data?.lineOffset || 1;
+  const visibleLineCount = data?.visibleLineCount || 10;
   const ranges = useMemo(() => data?.ranges || [[1, Infinity]], [data?.ranges]);
   const { subSlideIndex } = useSlideContext();
   const codeRef = useRef<HTMLElement>(null);
@@ -40,7 +41,6 @@ const Code: React.FC<any> = ({ children, data }) => {
 
   // code line vars
   const lineHeight = 24;
-  const visibleLineCount = 10;
   const codeHeight =
     children.length > visibleLineCount
       ? visibleLineCount * lineHeight

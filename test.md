@@ -12,7 +12,7 @@ earum at consectetur distinctio. Suscipit, eligendi fugit.
 
 [note]: First note
 
-```js |3|5-7|9-11|13-19 (11)
+```js |3|5-7|9-11|13-19 (11) [15]
 const changeSlideIndexByValue = useCallback(
   (delta: number, skipSubs: boolean) => {
     const subSlideCount = slides[currentSlideIndex].subSlideCount; // some ridiculous long comment which should either be a line above or below
