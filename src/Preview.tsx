@@ -63,7 +63,7 @@ const Preview: React.FC<PreviewProps> = ({ startPresenting, slides }) => {
               key={`preview-slide-${idx}`}
               className="slide"
               style={{
-                width: SizeTable[slide.size] || 992,
+                width: slide.size ? SizeTable[slide.size] : 992,
               }}
               ref={scrollRefs.current[idx]}
             >
