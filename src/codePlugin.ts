@@ -142,7 +142,7 @@ export const codePlugin: any = () => {
                 .split("-")
                 .map((point: string) => parseInt(point));
             })
-          : [1, Infinity];
+          : [[1, Infinity]];
 
         node.properties["data"] = {
           ...node.data,
