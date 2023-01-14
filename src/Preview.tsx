@@ -7,11 +7,11 @@ import React, {
 } from "react";
 import { SizeTable } from "./constants";
 import { useSlideKeyHandler } from "./hooks/useSlideNavigation";
-import { ISlide } from "./interfaces/ISlide";
+import { SlideType } from "./types";
 
 interface PreviewProps {
   startPresenting: () => void;
-  slides: ISlide[];
+  slides: SlideType[];
 }
 
 const Preview: React.FC<PreviewProps> = ({ startPresenting, slides }) => {
@@ -57,7 +57,7 @@ const Preview: React.FC<PreviewProps> = ({ startPresenting, slides }) => {
         Start Presenting
       </button>
       <div className="slides-preview">
-        {slides.map((slide: ISlide, idx: number) => {
+        {slides.map((slide: SlideType, idx: number) => {
           return (
             <div
               key={`preview-slide-${idx}`}

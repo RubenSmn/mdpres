@@ -1,7 +1,7 @@
 import React, { useCallback, useReducer } from "react";
 import ControlButtons from "./ControlButtons";
 import { useSlideKeyHandler } from "./hooks/useSlideNavigation";
-import { ISlide } from "./interfaces/ISlide";
+import { SlideType } from "./types";
 import Menu from "./Menu";
 import NoteWindow from "./NoteWindow";
 import Progress from "./Progress";
@@ -15,7 +15,7 @@ import Slide from "./Slide";
 import "./styles/presentation.css";
 
 interface PresentationProps {
-  slides: ISlide[];
+  slides: SlideType[];
 }
 
 const translateAxis = "X";
@@ -64,7 +64,7 @@ const Presentation: React.FC<PresentationProps> = ({ slides }) => {
   return (
     <>
       <div className="slides">
-        {slides.map((slide: ISlide, idx: number) => {
+        {slides.map((slide: SlideType, idx: number) => {
           return (
             <Slide
               key={`slide-${idx}`}

@@ -1,12 +1,12 @@
 import { useState } from "react";
 import Input from "./Input";
-import { ISlide } from "./interfaces/ISlide";
+import { SlideType } from "./types";
 import Presentation from "./Presentation";
 import Preview from "./Preview";
 import "./styles/home.css";
 
 export default function App() {
-  const [slides, setSlides] = useState<ISlide[]>([]);
+  const [slides, setSlides] = useState<SlideType[]>([]);
   const [startPresenting, setStartPresenting] = useState(false);
 
   return slides.length < 1 || startPresenting === false ? (

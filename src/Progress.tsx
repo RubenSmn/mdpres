@@ -1,10 +1,10 @@
 import React, { useMemo } from "react";
-import { ISlide } from "./interfaces/ISlide";
+import { SlideType } from "./types";
 
 interface ProgressProps {
   currentSlideIndex: number;
   subSlideIndex: number;
-  slides: ISlide[];
+  slides: SlideType[];
 }
 
 const Progress: React.FC<ProgressProps> = ({
@@ -21,7 +21,7 @@ const Progress: React.FC<ProgressProps> = ({
   );
 
   const currentProgress = slides.reduce(
-    (progress: number, slide: ISlide, idx: number) => {
+    (progress: number, slide: SlideType, idx: number) => {
       if (idx < currentSlideIndex) {
         return progress + slide.subSlideCount;
       } else if (idx === currentSlideIndex) {

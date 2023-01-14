@@ -1,11 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
-import { ISlide } from "./interfaces/ISlide";
+import { SlideType } from "./types";
 import "./styles/notes.css";
 import { copyDocumentStyles } from "./utils";
 
 interface NoteWindowProps {
-  notes: ISlide["notes"];
+  notes: SlideType["notes"];
   slideIndex: number;
   slideTitle: string;
 }

@@ -1,4 +1,4 @@
-import { ISlide } from "../interfaces/ISlide";
+import { SlideType } from "../types";
 
 export const processMarkdownFile = (markdown: string) => {
   const configs = markdown.match(/(?<=---\n)[\w\s\:\-\=\+\.\_]*(?=---\n\n?)/g);
@@ -31,7 +31,7 @@ export const processMarkdownFile = (markdown: string) => {
 
     const subSlideCount = subSlides.split("|").length;
 
-    const data: ISlide = {
+    const data: SlideType = {
       content: content[i],
       subSlideCount: subSlideCount,
       notes: notes,
