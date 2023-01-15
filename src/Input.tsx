@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { SlideType } from "./types";
 import { processMarkdownFile, markdownToReact } from "./utils";
 
@@ -28,6 +28,7 @@ const readMarkdownFile = (
 
 const Input: React.FC<InputProps> = ({ setSlides }) => {
   const [error, setError] = useState<string | null>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const fileError = readMarkdownFile(e, (res: SlideType[]) => {
@@ -41,13 +42,24 @@ const Input: React.FC<InputProps> = ({ setSlides }) => {
     setError(fileError);
   };
 
+  const handleLabel = (e: React.KeyboardEvent) => {
+    if (e.key !== "Enter" || inputRef.current === null) return;
+    inputRef.current.click();
+  };
+
   return (
     <>
       <div>
-        <label className="button" htmlFor="fileUploadInput">
+        <label
+          className="button"
+          htmlFor="fileUploadInput"
+          tabIndex={0}
+          onKeyUp={handleLabel}
+        >
           Upload File
         </label>
         <input
+          ref={inputRef}
           id="fileUploadInput"
           type="file"
           onChange={handleChange}
