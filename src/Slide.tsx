@@ -44,7 +44,7 @@ const Slide: React.FC<SlideProps> = ({
         <div className="markdown-body">
           <div
             style={{
-              width: SizeTable[size] || 992,
+              width: SizeTable[size] || SizeTable["md"],
             }}
           >
             {content}

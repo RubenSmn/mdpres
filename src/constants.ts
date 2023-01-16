@@ -11,6 +11,7 @@ export const sanitizeSchema: Partial<typeof defaultSchema> = {
 export const SizeTable = {
   xs: 320,
   sm: 768,
-  md: 1224,
+  md: 992,
+  lg: 1224,
   xl: 1824,
 };
