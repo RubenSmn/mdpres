@@ -54,10 +54,14 @@ const Presentation: React.FC<PresentationProps> = ({ slides }) => {
     }
   };
 
-  const changeSubIndex = (index: number) => {
-    const subSlideCount = slides[currentSlideIndex].subSlideCount;
-    if (index >= 0 && index <= subSlideCount) {
-      dispatch(changeSubSlideToValue(index));
+  const onCommandSlideChange = (slideIndex: number, subIndex: number) => {
+    if (slideIndex >= 0 && slideIndex < slides.length) {
+      dispatch(changeCurrentSlideToValue(slideIndex));
+
+      const subSlideCount = slides[slideIndex].subSlideCount;
+      if (subIndex >= 0 && subIndex < subSlideCount) {
+        dispatch(changeSubSlideToValue(subIndex));
+      }
     }
   };
 
@@ -92,10 +96,7 @@ const Presentation: React.FC<PresentationProps> = ({ slides }) => {
         slideIndex={currentSlideIndex}
         slideTitle={slides[currentSlideIndex].title || "No Slide title"}
       />
-      <Menu
-        changeSlideIndex={changeSlideIndex}
-        changeSubIndex={changeSubIndex}
-      />
+      <Menu onCommandSlideChange={onCommandSlideChange} />
     </>
   );
 };

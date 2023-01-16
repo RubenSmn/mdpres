@@ -1,11 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 
 interface MenuProps {
-  changeSlideIndex: (index: number) => void;
-  changeSubIndex: (index: number) => void;
+  onCommandSlideChange: (slideIndex: number, subIndex: number) => void;
 }
 
-const Menu: React.FC<MenuProps> = ({ changeSlideIndex, changeSubIndex }) => {
+const Menu: React.FC<MenuProps> = ({ onCommandSlideChange }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [commandValue, setCommandValue] = useState("");
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -27,8 +26,7 @@ const Menu: React.FC<MenuProps> = ({ changeSlideIndex, changeSubIndex }) => {
       ? parseInt(result?.groups?.subIndex) - 1
       : 0;
 
-    changeSlideIndex(slideIndex);
-    changeSubIndex(subIndex);
+    onCommandSlideChange(slideIndex, subIndex);
     setCommandValue("");
     setIsOpen(false);
     if (inputRef.current) inputRef.current.blur();
