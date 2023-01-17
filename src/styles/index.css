@@ -1,6 +1,7 @@
 @import "./../../node_modules/github-markdown-css/github-markdown.css";
 @import "./../../node_modules/prismjs/themes/prism-okaidia.min.css";
 /* @import "./../node_modules/prismjs/themes/prism-solarizedlight.min.css"; */
+@import "./presentation.css";
 
 :root {
   --blue: #456d8a;

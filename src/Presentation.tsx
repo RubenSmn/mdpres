@@ -12,7 +12,6 @@ import slideReducer, {
   SlideStateType,
 } from "./reducers/slideReducer";
 import Slide from "./Slide";
-import "./styles/presentation.css";
 
 interface PresentationProps {
   slides: SlideType[];
