@@ -1,6 +1,6 @@
 import React from "react";
 import { SizeTable } from "./constants";
-import SlideProvider from "./SlideProvider";
+import SubSlideProvider from "./SubSlideProvider";
 
 interface SlideProps {
   content: React.ReactNode;
@@ -30,28 +30,29 @@ const Slide: React.FC<SlideProps> = ({
   }
 
   return (
-    <SlideProvider
-      value={{
-        subSlideIndex: currentSlideIndex === slideIndex ? subSlideIndex : 0,
+    <div
+      className="slide"
+      style={{
+        transform: `translate${translateAxis}(${translateValue})`,
       }}
     >
-      <div
-        className="slide"
-        style={{
-          transform: `translate${translateAxis}(${translateValue})`,
-        }}
-      >
-        <div className="markdown-body">
-          <div
-            style={{
-              width: SizeTable[size] || SizeTable["md"],
+      <div className="markdown-body">
+        <div
+          style={{
+            width: SizeTable[size] || SizeTable["md"],
+          }}
+        >
+          <SubSlideProvider
+            value={{
+              subSlideIndex:
+                currentSlideIndex === slideIndex ? subSlideIndex : 0,
             }}
           >
             {content}
-          </div>
+          </SubSlideProvider>
         </div>
       </div>
-    </SlideProvider>
+    </div>
   );
 };
 

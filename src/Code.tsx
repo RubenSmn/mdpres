@@ -5,7 +5,7 @@ import React, {
   useMemo,
   useRef,
 } from "react";
-import { useSlideContext } from "./SlideProvider";
+import { useSlideContext } from "./SubSlideProvider";
 
 const Code: React.FC<any> = ({ children, data }) => {
   const lineOffset = data?.lineOffset || 1;
