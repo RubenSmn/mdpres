@@ -8,12 +8,16 @@ interface NoteWindowProps {
   notes: SlideType["notes"];
   slideIndex: number;
   slideTitle: string;
+  showNotes: boolean;
+  setShowNotes: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const NoteWindow: React.FC<NoteWindowProps> = ({
   notes,
   slideIndex,
   slideTitle,
+  showNotes,
+  setShowNotes,
 }) => {
   const [container, setContainer] = useState<HTMLDivElement | null>(null);
   const noteWindow = useRef<Window | null>(null);
@@ -24,9 +28,12 @@ const NoteWindow: React.FC<NoteWindowProps> = ({
   }, []);
 
   useEffect(() => {
-    // when container is ready
-    if (container !== null) {
-      // create window
+    const handleBeforeUnload = () => {
+      setShowNotes(false);
+      return null;
+    };
+
+    if (container !== null && showNotes) {
       noteWindow.current = window.open(
         "",
         "",
@@ -38,14 +45,20 @@ const NoteWindow: React.FC<NoteWindowProps> = ({
       // save reference to window for cleanup
       const curWindow = noteWindow.current;
 
+      // add handler to reset state
+      curWindow?.addEventListener("beforeunload", handleBeforeUnload);
+
       // copy the styles from current window to noteWindow
       if (curWindow?.document)
         copyDocumentStyles(window.document, curWindow.document);
 
       // return cleanup function
-      return () => curWindow?.close();
+      return () => {
+        curWindow?.close();
+        curWindow?.removeEventListener("beforeunload", handleBeforeUnload);
+      };
     }
-  }, [container]);
+  }, [showNotes, container, setShowNotes]);
 
   if (container !== null) {
     const notesElement =

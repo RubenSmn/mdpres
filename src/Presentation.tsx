@@ -1,4 +1,4 @@
-import React, { useCallback, useReducer } from "react";
+import React, { useReducer, useState } from "react";
 import ControlButtons from "./ControlButtons";
 import { useSlideKeyHandler } from "./hooks/useSlideNavigation";
 import { SlideType } from "./types";
@@ -29,6 +29,7 @@ const Presentation: React.FC<PresentationProps> = ({ slides }) => {
     slideReducer,
     initialState,
   );
+  const [showNotes, setShowNotes] = useState(true);
 
   const changeSlideIndexByValue = (delta: number, skipSubs: boolean) => {
     const subSlideCount = slides[currentSlideIndex].subSlideCount;
@@ -51,6 +52,10 @@ const Presentation: React.FC<PresentationProps> = ({ slides }) => {
     if (index >= 0 && index < slides.length) {
       dispatch(changeCurrentSlideToValue(index));
     }
+  };
+
+  const onCommandShowNotes = (shouldShowNotes: boolean) => {
+    setShowNotes(shouldShowNotes);
   };
 
   const onCommandSlideChange = (slideIndex: number, subIndex: number) => {
@@ -94,8 +99,13 @@ const Presentation: React.FC<PresentationProps> = ({ slides }) => {
         notes={slides[currentSlideIndex].notes}
         slideIndex={currentSlideIndex}
         slideTitle={slides[currentSlideIndex].title || "No Slide title"}
+        showNotes={showNotes}
+        setShowNotes={setShowNotes}
       />
-      <Menu onCommandSlideChange={onCommandSlideChange} />
+      <Menu
+        onCommandSlideChange={onCommandSlideChange}
+        onCommandShowNotes={onCommandShowNotes}
+      />
     </>
   );
 };

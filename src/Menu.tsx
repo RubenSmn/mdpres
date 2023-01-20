@@ -2,9 +2,13 @@ import React, { useEffect, useRef, useState } from "react";
 
 interface MenuProps {
   onCommandSlideChange: (slideIndex: number, subIndex: number) => void;
+  onCommandShowNotes: (shouldShowNotes: boolean) => void;
 }
 
-const Menu: React.FC<MenuProps> = ({ onCommandSlideChange }) => {
+const Menu: React.FC<MenuProps> = ({
+  onCommandSlideChange,
+  onCommandShowNotes,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [commandValue, setCommandValue] = useState("");
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -16,17 +20,24 @@ const Menu: React.FC<MenuProps> = ({ onCommandSlideChange }) => {
 
   const handleAction = (e: React.FormEvent) => {
     e.preventDefault();
-    const result = commandValue.match(
-      /(?<slideIndex>\d+)(?:\:(?<subIndex>\d+))?/m,
-    );
-    const slideIndex = result?.groups?.slideIndex
-      ? parseInt(result?.groups?.slideIndex) - 1
-      : 0;
-    const subIndex = result?.groups?.subIndex
-      ? parseInt(result?.groups?.subIndex) - 1
-      : 0;
+    if (commandValue.toLowerCase() === "show notes") {
+      onCommandShowNotes(true);
+    } else if (commandValue.toLowerCase() === "hide notes") {
+      onCommandShowNotes(false);
+    } else {
+      const result = commandValue.match(
+        /(?<slideIndex>\d+)(?:\:(?<subIndex>\d+))?/m,
+      );
+      const slideIndex = result?.groups?.slideIndex
+        ? parseInt(result?.groups?.slideIndex) - 1
+        : 0;
+      const subIndex = result?.groups?.subIndex
+        ? parseInt(result?.groups?.subIndex) - 1
+        : 0;
 
-    onCommandSlideChange(slideIndex, subIndex);
+      onCommandSlideChange(slideIndex, subIndex);
+    }
+
     setCommandValue("");
     setIsOpen(false);
     if (inputRef.current) inputRef.current.blur();
