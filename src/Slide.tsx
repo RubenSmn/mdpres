@@ -1,24 +1,23 @@
 import React from "react";
 import { SizeTable } from "./constants";
+import { useSlideContext } from "./SlideProvider";
 import SubSlideProvider from "./SubSlideProvider";
 
 interface SlideProps {
   content: React.ReactNode;
-  currentSlideIndex: number;
   slideIndex: number;
-  subSlideIndex: number;
   translateAxis: string;
   size: keyof typeof SizeTable;
 }
 
 const Slide: React.FC<SlideProps> = ({
   content,
-  currentSlideIndex,
   slideIndex,
-  subSlideIndex,
   translateAxis,
   size,
 }) => {
+  const { currentSlideIndex, subSlideIndex } = useSlideContext();
+
   let translateValue = "100%";
 
   if (currentSlideIndex > slideIndex) {

@@ -1,17 +1,14 @@
 import React, { useMemo } from "react";
+import { useSlideContext } from "./SlideProvider";
 import { SlideType } from "./types";
 
 interface ProgressProps {
-  currentSlideIndex: number;
-  subSlideIndex: number;
   slides: SlideType[];
 }
 
-const Progress: React.FC<ProgressProps> = ({
-  currentSlideIndex,
-  subSlideIndex,
-  slides,
-}) => {
+const Progress: React.FC<ProgressProps> = ({ slides }) => {
+  const { currentSlideIndex, subSlideIndex } = useSlideContext();
+
   const totalSlides = useMemo(
     () =>
       slides.reduce((total, slide) => {

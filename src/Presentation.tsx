@@ -1,17 +1,17 @@
-import React, { useReducer, useState } from "react";
+import React, { useState } from "react";
 import ControlButtons from "./ControlButtons";
 import { useSlideKeyHandler } from "./hooks/useSlideNavigation";
 import { SlideType } from "./types";
 import Menu from "./Menu";
 import NoteWindow from "./NoteWindow";
 import Progress from "./Progress";
-import slideReducer, {
+import {
   changeCurrentSlideToValue,
   changeSubSlideByValue,
   changeSubSlideToValue,
-  SlideStateType,
 } from "./reducers/slideReducer";
 import Slide from "./Slide";
+import SlideProvider, { useSlideContext } from "./SlideProvider";
 
 interface PresentationProps {
   slides: SlideType[];
@@ -19,16 +19,8 @@ interface PresentationProps {
 
 const translateAxis = "X";
 
-const initialState: SlideStateType = {
-  currentSlideIndex: 0,
-  subSlideIndex: 0,
-};
-
 const Presentation: React.FC<PresentationProps> = ({ slides }) => {
-  const [{ currentSlideIndex, subSlideIndex }, dispatch] = useReducer(
-    slideReducer,
-    initialState,
-  );
+  const { currentSlideIndex, subSlideIndex, dispatch } = useSlideContext();
   const [showNotes, setShowNotes] = useState(true);
 
   const changeSlideIndexByValue = (delta: number, skipSubs: boolean) => {
@@ -77,10 +69,8 @@ const Presentation: React.FC<PresentationProps> = ({ slides }) => {
             <Slide
               key={`slide-${idx}`}
               size={slide.size}
-              currentSlideIndex={currentSlideIndex}
               content={slide.markdown}
               slideIndex={idx}
-              subSlideIndex={subSlideIndex}
               translateAxis={translateAxis}
             />
           );
@@ -90,11 +80,7 @@ const Presentation: React.FC<PresentationProps> = ({ slides }) => {
         onLeftClick={() => changeSlideIndexByValue(-1, false)}
         onRightClick={() => changeSlideIndexByValue(1, false)}
       />
-      <Progress
-        slides={slides}
-        currentSlideIndex={currentSlideIndex}
-        subSlideIndex={subSlideIndex}
-      />
+      <Progress slides={slides} />
       <NoteWindow
         notes={slides[currentSlideIndex].notes}
         slideIndex={currentSlideIndex}
@@ -110,4 +96,10 @@ const Presentation: React.FC<PresentationProps> = ({ slides }) => {
   );
 };
 
-export default Presentation;
+export default function WithProvider(props: PresentationProps) {
+  return (
+    <SlideProvider>
+      <Presentation {...props} />
+    </SlideProvider>
+  );
+}
