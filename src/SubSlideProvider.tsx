@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext } from "react";
 
 interface SubSlideProviderProps {
   children: React.ReactNode;
@@ -28,6 +28,6 @@ const SubSlideProvider: React.FC<SubSlideProviderProps> = ({
 
 export default SubSlideProvider;
 
-export const useSlideContext = () => {
+export const useSubSlideContext = () => {
   return useContext(SubSlideContext);
 };

@@ -5,13 +5,13 @@ import React, {
   useMemo,
   useRef,
 } from "react";
-import { useSlideContext } from "./SubSlideProvider";
+import { useSubSlideContext } from "./SubSlideProvider";
 
 const Code: React.FC<any> = ({ children, data }) => {
   const lineOffset = data?.lineOffset || 1;
   const visibleLineCount = data?.visibleLineCount || 10;
   const ranges = useMemo(() => data?.ranges || [[1, Infinity]], [data?.ranges]);
-  const { subSlideIndex } = useSlideContext();
+  const { subSlideIndex } = useSubSlideContext();
   const codeRef = useRef<HTMLElement>(null);
 
   const isInRange = (value: number) => {
