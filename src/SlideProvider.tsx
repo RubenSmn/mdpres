@@ -4,26 +4,32 @@ import slideReducer, {
   SlideActionType,
 } from "./reducers/slideReducer";
 
-interface SlideProviderProps {
-  children: React.ReactNode;
-}
-
-type SlidesContextType = {
-  currentSlideIndex: number;
-  subSlideIndex: number;
-  dispatch: React.Dispatch<SlideActionType>;
-};
-
-export const SlideContext = createContext<SlidesContextType>({
-  currentSlideIndex: 0,
-  subSlideIndex: 0,
-  dispatch: () => console.warn("No SlideProvider"),
-});
-
 const initialState: SlideStateType = {
   currentSlideIndex: 0,
   subSlideIndex: 0,
 };
+
+interface SlideProviderProps {
+  children: React.ReactNode;
+}
+
+type SlideContextType = {
+  currentSlideIndex: number;
+  subSlideIndex: number;
+};
+
+type SlideDispatchContext = {
+  dispatch: React.Dispatch<SlideActionType>;
+};
+
+export const SlideContext = createContext<SlideContextType>({
+  currentSlideIndex: 0,
+  subSlideIndex: 0,
+});
+
+export const SlideDispatchContext = createContext<SlideDispatchContext>({
+  dispatch: () => console.warn("No SlideProvider"),
+});
 
 const SlideProvider: React.FC<SlideProviderProps> = ({ children }) => {
   const [{ currentSlideIndex, subSlideIndex }, dispatch] = useReducer(
@@ -34,11 +40,12 @@ const SlideProvider: React.FC<SlideProviderProps> = ({ children }) => {
   const value = {
     currentSlideIndex,
     subSlideIndex,
-    dispatch,
   };
 
   return (
-    <SlideContext.Provider value={value}>{children}</SlideContext.Provider>
+    <SlideDispatchContext.Provider value={{ dispatch }}>
+      <SlideContext.Provider value={value}>{children}</SlideContext.Provider>
+    </SlideDispatchContext.Provider>
   );
 };
 
@@ -46,4 +53,8 @@ export default SlideProvider;
 
 export const useSlideContext = () => {
   return useContext(SlideContext);
+};
+
+export const useSlideDispatch = () => {
+  return useContext(SlideDispatchContext);
 };

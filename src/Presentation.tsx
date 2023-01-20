@@ -11,7 +11,10 @@ import {
   changeSubSlideToValue,
 } from "./reducers/slideReducer";
 import Slide from "./Slide";
-import SlideProvider, { useSlideContext } from "./SlideProvider";
+import SlideProvider, {
+  useSlideContext,
+  useSlideDispatch,
+} from "./SlideProvider";
 
 interface PresentationProps {
   slides: SlideType[];
@@ -20,7 +23,8 @@ interface PresentationProps {
 const translateAxis = "X";
 
 const Presentation: React.FC<PresentationProps> = ({ slides }) => {
-  const { currentSlideIndex, subSlideIndex, dispatch } = useSlideContext();
+  const { currentSlideIndex, subSlideIndex } = useSlideContext();
+  const { dispatch } = useSlideDispatch();
   const [showNotes, setShowNotes] = useState(true);
 
   const changeSlideIndexByValue = (delta: number, skipSubs: boolean) => {
