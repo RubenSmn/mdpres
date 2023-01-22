@@ -66,9 +66,11 @@ const Code: React.FC<any> = ({ children, data }) => {
     if (children.length <= visibleLineCount) return;
 
     // set scroll to top if subSlideIndex is zero
-    if (subSlideIndex === 0 && codeRef.current) {
-      codeRef.current.scrollTop = 0;
-      return;
+    if (subSlideIndex === 0) {
+      const timeoutId = setTimeout(() => {
+        if (codeRef.current) codeRef.current.scrollTop = 0;
+      }, 400);
+      return () => clearTimeout(timeoutId);
     }
     // run the scroll handler when the subSlideIndex changes
     // needs delay for handling changes from command mode
