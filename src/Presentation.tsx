@@ -72,7 +72,7 @@ const Presentation: React.FC<PresentationProps> = ({ slides }) => {
           return (
             <Slide
               key={`slide-${idx}`}
-              size={slide.size}
+              size={slide.size || "md"}
               content={slide.markdown}
               slideIndex={idx}
               translateAxis={translateAxis}
