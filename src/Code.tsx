@@ -73,11 +73,7 @@ const Code: React.FC<any> = ({ children, data }) => {
       return () => clearTimeout(timeoutId);
     }
     // run the scroll handler when the subSlideIndex changes
-    // needs delay for handling changes from command mode
-    const timeout = setTimeout(() => {
-      scrollSmoothHandler(ranges[subSlideIndex][0] - 1);
-    }, 250); // the time of the 'code-line' transition
-    return () => clearTimeout(timeout);
+    scrollSmoothHandler(ranges[subSlideIndex][0] - 1);
   }, [
     children.length,
     visibleLineCount,
