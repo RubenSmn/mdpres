@@ -150,7 +150,7 @@ code > span > span {
 .arrow {
   position: absolute;
   background: none;
-  border: solid black;
+  border: solid rgba(255, 255, 0, 0.5);
   border-width: 0 0.5rem 0.5rem 0;
   display: inline-block;
   padding: 0.5rem;
@@ -158,8 +158,13 @@ code > span > span {
   cursor: pointer;
 }
 
+.arrow.active {
+  border: solid rgba(255, 255, 0, 0.8);
+  border-width: 0 0.65rem 0.65rem 0;
+}
+
 .arrow:hover {
-  border: solid black;
+  border: solid rgba(255, 255, 0, 0.8);
   border-width: 0 0.65rem 0.65rem 0;
 }
 

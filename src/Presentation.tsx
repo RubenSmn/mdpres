@@ -26,8 +26,10 @@ const Presentation: React.FC<PresentationProps> = ({ slides }) => {
   const { currentSlideIndex, subSlideIndex } = useSlideContext();
   const { dispatch } = useSlideDispatch();
   const [showNotes, setShowNotes] = useState(true);
+  const [direction, setDirection] = useState(0);
 
   const changeSlideIndexByValue = (delta: number, skipSubs: boolean) => {
+    setDirection(delta);
     const subSlideCount = slides[currentSlideIndex].subSlideCount;
     if (
       subSlideIndex + delta < subSlideCount &&
@@ -81,8 +83,8 @@ const Presentation: React.FC<PresentationProps> = ({ slides }) => {
         })}
       </div>
       <ControlButtons
-        onLeftClick={() => changeSlideIndexByValue(-1, false)}
-        onRightClick={() => changeSlideIndexByValue(1, false)}
+        onClick={(d) => changeSlideIndexByValue(d, false)}
+        direction={direction}
       />
       <Progress slides={slides} />
       <NoteWindow
