@@ -31,7 +31,8 @@ export const processMarkdownFile = (markdown: string) => {
 
     const subSlideCount = subSlides.split("|").length;
 
-    const data: SlideType = {
+    // TODO: SlideType not working with regex groups
+    const data: any = {
       content: content[i],
       subSlideCount: subSlideCount,
       notes: notes,
