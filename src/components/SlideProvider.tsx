@@ -2,7 +2,7 @@ import React, { createContext, useContext, useReducer } from "react";
 import slideReducer, {
   SlideStateType,
   SlideActionType,
-} from "./reducers/slideReducer";
+} from "../reducers/slideReducer";
 
 const initialState: SlideStateType = {
   currentSlideIndex: 0,

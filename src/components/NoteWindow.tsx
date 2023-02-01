@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import { createPortal } from "react-dom";
-import { SlideType } from "./types";
-import "./styles/notes.css";
-import { copyDocumentStyles } from "./utils";
+import { SlideType } from "../types";
+import "../styles/notes.css";
+import { copyDocumentStyles } from "../utils";
 
 interface NoteWindowProps {
   notes: SlideType["notes"];

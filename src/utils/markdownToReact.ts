@@ -8,7 +8,7 @@ import rehypeSanitize from "rehype-sanitize";
 import { sanitizeSchema } from "../constants";
 import { codePlugin } from "../codePlugin";
 import rehypeReact from "rehype-react";
-import Code from "../Code";
+import Code from "../components/Code";
 
 export const markdownToReact = (content: string) => {
   return unified()

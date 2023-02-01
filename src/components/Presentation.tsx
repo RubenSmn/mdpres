@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ControlButtons from "./ControlButtons";
-import { useSlideKeyHandler } from "./hooks/useSlideNavigation";
-import { SlideType } from "./types";
+import { useSlideKeyHandler } from "../hooks/useSlideNavigation";
+import { SlideType } from "../types";
 import Menu from "./Menu";
 import NoteWindow from "./NoteWindow";
 import Progress from "./Progress";
@@ -9,7 +9,7 @@ import {
   changeCurrentSlideToValue,
   changeSubSlideByValue,
   changeSubSlideToValue,
-} from "./reducers/slideReducer";
+} from "../reducers/slideReducer";
 import Slide from "./Slide";
 import SlideProvider, {
   useSlideContext,

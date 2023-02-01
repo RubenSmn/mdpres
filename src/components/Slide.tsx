@@ -1,5 +1,5 @@
 import React from "react";
-import { SizeTable } from "./constants";
+import { SizeTable } from "../constants";
 import { useSlideContext } from "./SlideProvider";
 import SubSlideProvider from "./SubSlideProvider";
 

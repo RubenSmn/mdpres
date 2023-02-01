@@ -5,9 +5,9 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { SizeTable } from "./constants";
-import { useSlideKeyHandler } from "./hooks/useSlideNavigation";
-import { SlideType } from "./types";
+import { SizeTable } from "../constants";
+import { useSlideKeyHandler } from "../hooks/useSlideNavigation";
+import { SlideType } from "../types";
 
 interface PreviewProps {
   startPresenting: () => void;

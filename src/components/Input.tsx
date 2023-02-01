@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
-import { SlideType } from "./types";
-import { processMarkdownFile, markdownToReact } from "./utils";
+import { SlideType } from "../types";
+import { processMarkdownFile, markdownToReact } from "../utils";
 
 interface InputProps {
   setSlides: React.Dispatch<React.SetStateAction<SlideType[]>>;

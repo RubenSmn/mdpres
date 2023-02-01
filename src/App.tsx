@@ -1,8 +1,8 @@
 import { useState } from "react";
-import Input from "./Input";
+import Input from "./components/Input";
 import { SlideType } from "./types";
-import Presentation from "./Presentation";
-import Preview from "./Preview";
+import Presentation from "./components/Presentation";
+import Preview from "./components/Preview";
 import "./styles/home.css";
 
 export default function App() {

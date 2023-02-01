@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { useSlideContext } from "./SlideProvider";
-import { SlideType } from "./types";
+import { SlideType } from "../types";
 
 interface ProgressProps {
   slides: SlideType[];
