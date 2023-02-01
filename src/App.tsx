@@ -4,13 +4,14 @@ import { SlideType } from "./types";
 import Presentation from "./components/Presentation";
 import Preview from "./components/Preview";
 import "./styles/home.css";
+import { AppProvider } from "./components/AppProvider";
 
 export default function App() {
   const [slides, setSlides] = useState<SlideType[]>([]);
   const [startPresenting, setStartPresenting] = useState(false);
 
   return slides.length < 1 || startPresenting === false ? (
-    <>
+    <AppProvider>
       <header>
         <h2>MDPres</h2>
         <div className="header-links">
@@ -34,7 +35,7 @@ export default function App() {
           slides={slides}
         />
       )}
-    </>
+    </AppProvider>
   ) : (
     <Presentation slides={slides} />
   );
