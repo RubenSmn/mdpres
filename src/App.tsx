@@ -3,7 +3,6 @@ import Preview from "./components/Preview";
 import "./styles/home.css";
 import { AppProvider } from "./components/AppProvider";
 import Home from "./components/Home";
-import Header from "./components/Header";
 import ErrorPage from "./components/Error";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
@@ -26,12 +25,7 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return (
-    <>
-      <Header />
-      <RouterProvider router={router} />
-    </>
-  );
+  return <RouterProvider router={router} />;
 }
 
 export default function AppWithProvider() {

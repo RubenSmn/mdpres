@@ -11,6 +11,7 @@ import { useSlideKeyHandler } from "../hooks/useSlideNavigation";
 import { SlideType } from "../types";
 import { useAppContext } from "./AppProvider";
 import ErrorPage from "./Error";
+import Header from "./Header";
 
 const Preview = () => {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
@@ -55,35 +56,38 @@ const Preview = () => {
   };
 
   return slides.length > 0 ? (
-    <section>
-      <h3>Slide Preview</h3>
-      <button className="button" onClick={handleStartPresenting}>
-        Start Presenting
-      </button>
-      <div className="slides-preview">
-        {slides.map((slide: SlideType, idx: number) => {
-          return (
-            <div
-              key={`preview-slide-${idx}`}
-              className="slide"
-              style={{
-                width: SizeTable[slide.size || "md"],
-              }}
-              ref={scrollRefs.current[idx]}
-            >
-              <span
-                className={`slide-preview-number${
-                  currentSlideIndex === idx ? " active" : ""
-                }`}
+    <>
+      <Header />
+      <section>
+        <h3>Slide Preview</h3>
+        <button className="button" onClick={handleStartPresenting}>
+          Start Presenting
+        </button>
+        <div className="slides-preview">
+          {slides.map((slide: SlideType, idx: number) => {
+            return (
+              <div
+                key={`preview-slide-${idx}`}
+                className="slide"
+                style={{
+                  width: SizeTable[slide.size || "md"],
+                }}
+                ref={scrollRefs.current[idx]}
               >
-                {idx + 1}
-              </span>
-              <div className="markdown-body">{slide.markdown}</div>
-            </div>
-          );
-        })}
-      </div>
-    </section>
+                <span
+                  className={`slide-preview-number${
+                    currentSlideIndex === idx ? " active" : ""
+                  }`}
+                >
+                  {idx + 1}
+                </span>
+                <div className="markdown-body">{slide.markdown}</div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+    </>
   ) : (
     <ErrorPage
       title="Oops, it looks like you have no slides uploaded yet!"
