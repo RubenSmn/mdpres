@@ -4,20 +4,24 @@ import "./styles/home.css";
 import { AppProvider } from "./components/AppProvider";
 import Home from "./components/Home";
 import Header from "./components/Header";
+import ErrorPage from "./components/Error";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Home />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/preview",
     element: <Preview />,
+    errorElement: <ErrorPage />,
   },
   {
     path: "presentation",
     element: <Presentation />,
+    errorElement: <ErrorPage />,
   },
 ]);
 

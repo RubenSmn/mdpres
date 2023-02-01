@@ -10,6 +10,7 @@ import { SizeTable } from "../constants";
 import { useSlideKeyHandler } from "../hooks/useSlideNavigation";
 import { SlideType } from "../types";
 import { useAppContext } from "./AppProvider";
+import ErrorPage from "./Error";
 
 const Preview = () => {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
@@ -83,7 +84,12 @@ const Preview = () => {
         })}
       </div>
     </section>
-  ) : null;
+  ) : (
+    <ErrorPage
+      title="Oops, it looks like you have no slides uploaded yet!"
+      textAfterLink="and upload your slides"
+    />
+  );
 };
 
 export default Preview;
