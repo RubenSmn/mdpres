@@ -5,17 +5,16 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { useNavigate } from "react-router-dom";
 import { SizeTable } from "../constants";
 import { useSlideKeyHandler } from "../hooks/useSlideNavigation";
 import { SlideType } from "../types";
+import { useAppContext } from "./AppProvider";
 
-interface PreviewProps {
-  startPresenting: () => void;
-  slides: SlideType[];
-}
-
-const Preview: React.FC<PreviewProps> = ({ startPresenting, slides }) => {
+const Preview = () => {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+  const { slides } = useAppContext();
+  const navigate = useNavigate();
 
   const scrollRefs = useRef(
     [...Array(slides.length).keys()].map((_) => createRef<HTMLDivElement>()),
@@ -50,10 +49,14 @@ const Preview: React.FC<PreviewProps> = ({ startPresenting, slides }) => {
     scrollSmoothHandler(currentSlideIndex);
   }, [currentSlideIndex, scrollSmoothHandler]);
 
-  return (
+  const handleStartPresenting = () => {
+    navigate("/presentation");
+  };
+
+  return slides.length > 0 ? (
     <section>
       <h3>Slide Preview</h3>
-      <button className="button" onClick={startPresenting}>
+      <button className="button" onClick={handleStartPresenting}>
         Start Presenting
       </button>
       <div className="slides-preview">
@@ -80,7 +83,7 @@ const Preview: React.FC<PreviewProps> = ({ startPresenting, slides }) => {
         })}
       </div>
     </section>
-  );
+  ) : null;
 };
 
 export default Preview;
