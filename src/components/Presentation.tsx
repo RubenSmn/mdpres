@@ -100,10 +100,10 @@ const Presentation = () => {
   );
 };
 
-export default function WithProvider(props: PresentationProps) {
+export default function WithProvider() {
   return (
     <SlideProvider>
-      <Presentation {...props} />
+      <Presentation />
     </SlideProvider>
   );
 }
