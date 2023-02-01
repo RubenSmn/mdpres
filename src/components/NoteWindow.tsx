@@ -54,8 +54,8 @@ const NoteWindow: React.FC<NoteWindowProps> = ({
 
       // return cleanup function
       return () => {
-        curWindow?.close();
         curWindow?.removeEventListener("beforeunload", handleBeforeUnload);
+        curWindow?.close();
       };
     }
   }, [showNotes, container, setShowNotes]);
