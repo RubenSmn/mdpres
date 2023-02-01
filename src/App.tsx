@@ -1,42 +1,36 @@
 import { useState } from "react";
-import Input from "./components/Input";
-import { SlideType } from "./types";
 import Presentation from "./components/Presentation";
 import Preview from "./components/Preview";
 import "./styles/home.css";
-import { AppProvider } from "./components/AppProvider";
+import { AppProvider, useAppContext } from "./components/AppProvider";
+import Home from "./components/Home";
+import Header from "./components/Header";
 
-export default function App() {
-  const [slides, setSlides] = useState<SlideType[]>([]);
+function App() {
+  const { slides } = useAppContext();
   const [startPresenting, setStartPresenting] = useState(false);
 
   return slides.length < 1 || startPresenting === false ? (
-    <AppProvider>
-      <header>
-        <h2>MDPres</h2>
-        <div className="header-links">
-          <a
-            href="https://github.com/RubenSmn/mdpres"
-            target={"_blank"}
-            rel="noreferrer"
-          >
-            Github
-          </a>
-        </div>
-      </header>
+    <>
+      <Header />
       {slides.length < 1 ? (
-        <section>
-          <h1>Start presenting your Markdown here</h1>
-          <Input setSlides={setSlides} />
-        </section>
+        <Home />
       ) : (
         <Preview
           startPresenting={() => setStartPresenting(true)}
           slides={slides}
         />
       )}
-    </AppProvider>
+    </>
   ) : (
     <Presentation slides={slides} />
+  );
+}
+
+export default function AppWithProvider() {
+  return (
+    <AppProvider>
+      <App />
+    </AppProvider>
   );
 }

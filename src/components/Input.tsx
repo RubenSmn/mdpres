@@ -1,10 +1,7 @@
 import React, { useRef, useState } from "react";
 import { SlideType } from "../types";
 import { processMarkdownFile, markdownToReact } from "../utils";
-
-interface InputProps {
-  setSlides: React.Dispatch<React.SetStateAction<SlideType[]>>;
-}
+import { useAppContextDispatch } from "./AppProvider";
 
 const readMarkdownFile = (
   e: React.ChangeEvent<HTMLInputElement>,
@@ -26,7 +23,8 @@ const readMarkdownFile = (
   return null;
 };
 
-const Input: React.FC<InputProps> = ({ setSlides }) => {
+const Input = () => {
+  const { setSlides } = useAppContextDispatch();
   const [error, setError] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
