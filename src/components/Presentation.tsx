@@ -15,14 +15,12 @@ import SlideProvider, {
   useSlideContext,
   useSlideDispatch,
 } from "./SlideProvider";
-
-interface PresentationProps {
-  slides: SlideType[];
-}
+import { useAppContext } from "./AppProvider";
 
 const translateAxis = "X";
 
-const Presentation: React.FC<PresentationProps> = ({ slides }) => {
+const Presentation = () => {
+  const { slides } = useAppContext();
   const { currentSlideIndex, subSlideIndex } = useSlideContext();
   const { dispatch } = useSlideDispatch();
   const [showNotes, setShowNotes] = useState(true);
@@ -102,10 +100,10 @@ const Presentation: React.FC<PresentationProps> = ({ slides }) => {
   );
 };
 
-export default function WithProvider(props: PresentationProps) {
+export default function WithProvider() {
   return (
     <SlideProvider>
-      <Presentation {...props} />
+      <Presentation />
     </SlideProvider>
   );
 }

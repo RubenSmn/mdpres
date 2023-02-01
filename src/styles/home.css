@@ -73,3 +73,7 @@ section input[type="file"] {
 .button:hover {
   background-color: var(--darkestBlue);
 }
+
+section.error {
+  color: white;
+}

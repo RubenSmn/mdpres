@@ -5,17 +5,18 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { useNavigate } from "react-router-dom";
 import { SizeTable } from "../constants";
 import { useSlideKeyHandler } from "../hooks/useSlideNavigation";
 import { SlideType } from "../types";
+import { useAppContext } from "./AppProvider";
+import ErrorPage from "./Error";
+import Header from "./Header";
 
-interface PreviewProps {
-  startPresenting: () => void;
-  slides: SlideType[];
-}
-
-const Preview: React.FC<PreviewProps> = ({ startPresenting, slides }) => {
+const Preview = () => {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+  const { slides } = useAppContext();
+  const navigate = useNavigate();
 
   const scrollRefs = useRef(
     [...Array(slides.length).keys()].map((_) => createRef<HTMLDivElement>()),
@@ -50,36 +51,48 @@ const Preview: React.FC<PreviewProps> = ({ startPresenting, slides }) => {
     scrollSmoothHandler(currentSlideIndex);
   }, [currentSlideIndex, scrollSmoothHandler]);
 
-  return (
-    <section>
-      <h3>Slide Preview</h3>
-      <button className="button" onClick={startPresenting}>
-        Start Presenting
-      </button>
-      <div className="slides-preview">
-        {slides.map((slide: SlideType, idx: number) => {
-          return (
-            <div
-              key={`preview-slide-${idx}`}
-              className="slide"
-              style={{
-                width: SizeTable[slide.size || "md"],
-              }}
-              ref={scrollRefs.current[idx]}
-            >
-              <span
-                className={`slide-preview-number${
-                  currentSlideIndex === idx ? " active" : ""
-                }`}
+  const handleStartPresenting = () => {
+    navigate("/presentation");
+  };
+
+  return slides.length > 0 ? (
+    <>
+      <Header />
+      <section>
+        <h3>Slide Preview</h3>
+        <button className="button" onClick={handleStartPresenting}>
+          Start Presenting
+        </button>
+        <div className="slides-preview">
+          {slides.map((slide: SlideType, idx: number) => {
+            return (
+              <div
+                key={`preview-slide-${idx}`}
+                className="slide"
+                style={{
+                  width: SizeTable[slide.size || "md"],
+                }}
+                ref={scrollRefs.current[idx]}
               >
-                {idx + 1}
-              </span>
-              <div className="markdown-body">{slide.markdown}</div>
-            </div>
-          );
-        })}
-      </div>
-    </section>
+                <span
+                  className={`slide-preview-number${
+                    currentSlideIndex === idx ? " active" : ""
+                  }`}
+                >
+                  {idx + 1}
+                </span>
+                <div className="markdown-body">{slide.markdown}</div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+    </>
+  ) : (
+    <ErrorPage
+      title="Oops, it looks like you have no slides uploaded yet!"
+      textAfterLink="and upload your slides"
+    />
   );
 };
 

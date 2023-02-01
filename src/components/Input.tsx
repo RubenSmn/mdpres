@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import { redirect, useNavigate } from "react-router-dom";
 import { SlideType } from "../types";
 import { processMarkdownFile, markdownToReact } from "../utils";
 import { useAppContextDispatch } from "./AppProvider";
@@ -27,6 +28,7 @@ const Input = () => {
   const { setSlides } = useAppContextDispatch();
   const [error, setError] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const navigate = useNavigate();
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const fileError = readMarkdownFile(e, (res: SlideType[]) => {
@@ -38,6 +40,7 @@ const Input = () => {
       setSlides(res);
     });
     setError(fileError);
+    navigate("/preview");
   };
 
   const handleLabel = (e: React.KeyboardEvent) => {
