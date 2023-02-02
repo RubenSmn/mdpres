@@ -1,0 +1,73 @@
+section {
+  justify-content: flex-start;
+}
+
+.container {
+  flex: 1;
+  max-width: 992px;
+  width: 100%;
+  color: white;
+}
+
+.example {
+  margin-block: 1.5rem;
+}
+
+.example p {
+  margin-bottom: 0.75rem;
+}
+
+.example code {
+  font-size: 0.75rem;
+  background-color: var(--darkBlue);
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+}
+
+.container h1,
+.container h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.container h3 {
+  margin-bottom: 0.25rem;
+  font-size: 1.2rem;
+}
+
+.demped {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.preContainer {
+  position: relative;
+}
+
+.container pre {
+  font-size: 0.8rem;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  background-color: rgba(255, 255, 255, 0.4);
+  color: var(--darkestBlue);
+  font-weight: bolder;
+  width: 100%;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.informationBlock {
+  width: 100%;
+  /* padding: 1.5rem; */
+  padding: 1rem;
+  /* border-radius: 0.75rem; */
+  border-radius: 0.5rem;
+  background-color: var(--yellow);
+  color: var(--yellowContrast);
+  /* border-left: 0.75rem solid var(--yellowDark); */
+  border-left: 0.55rem solid var(--yellowDark);
+}
+
+.informationBlock pre {
+  margin-top: 0.5rem;
+  padding: 1rem;
+}

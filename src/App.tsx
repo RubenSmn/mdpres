@@ -5,6 +5,7 @@ import { AppProvider } from "./components/AppProvider";
 import Home from "./components/Home";
 import ErrorPage from "./components/Error";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import GettingStarted from "./components/GettingStarted";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,11 @@ const router = createBrowserRouter([
   {
     path: "/presentation",
     element: <Presentation />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/getting-started",
+    element: <GettingStarted />,
     errorElement: <ErrorPage />,
   },
 ]);

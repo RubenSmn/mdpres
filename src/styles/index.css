@@ -7,6 +7,9 @@
   --blue: #456d8a;
   --darkBlue: #003973;
   --darkestBlue: #002e5c;
+  --yellow: #d9c243;
+  --yellowDark: #a49024;
+  --yellowContrast: #000;
 }
 
 * {
