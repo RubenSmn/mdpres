@@ -3,6 +3,8 @@ import styles from "../styles/GettingStarted.module.css";
 import {
   basicSlide,
   slideStartSyntax,
+  slideWithCode,
+  slideWithCodeHighlighting,
   slideWithNotes,
 } from "../getting-started-information";
 import useClipboard from "../hooks/useClipBoard";
@@ -93,6 +95,31 @@ export default function GettingStarted() {
               </>
             }
             md={slideWithNotes}
+          />
+          <ExampleBlock
+            title="With code"
+            description={
+              <>
+                You can use code blocks with the <code>```</code> syntax. You
+                can specify the language to apply syntax highlighting
+              </>
+            }
+            md={slideWithCode}
+          />
+          <AlertBlock>
+            Currently you can only have <b>one</b> code block <b>per</b> slide
+          </AlertBlock>
+          <ExampleBlock
+            title="With code highlighting"
+            description={
+              <>
+                You can use highlight different lines of code by using{" "}
+                <code>|1-2|3</code> after <code>```</code> this example first
+                shows <b>all</b> the code then highlights lines <code>1</code>{" "}
+                to <code>2</code> and finally line <code>3</code>
+              </>
+            }
+            md={slideWithCodeHighlighting}
           />
         </div>
       </section>
