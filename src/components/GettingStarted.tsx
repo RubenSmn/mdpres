@@ -5,6 +5,7 @@ import {
   slideStartSyntax,
   slideWithCode,
   slideWithCodeHighlighting,
+  slideWithCodeLineOffset,
   slideWithCustomSize,
   slideWithNotes,
 } from "../getting-started-information";
@@ -103,6 +104,14 @@ export default function GettingStarted() {
             <code>|1-2|3</code> after <code>```</code> this example first shows{" "}
             <b>all</b> the code then highlights lines <code>1</code> to{" "}
             <code>2</code> and finally line <code>3</code>
+          </ExampleBlock>
+          <ExampleBlock
+            title="With code line offset"
+            md={slideWithCodeLineOffset}
+          >
+            To have a custom line offset for your code blocks you can use{" "}
+            <code>({"<number>"})</code> this will start your line number at the
+            number you specified.
           </ExampleBlock>
           <ExampleBlock title="Size configuration" md={slideWithCustomSize}>
             There are a few configurations for the size of your presentation the{" "}

@@ -57,6 +57,19 @@ const z = x + y;
 \`\`\`
 `;
 
+export const slideWithCodeLineOffset = `---
+title: Slide with Code line offset
+---
+
+# Slide with code line offset
+
+\`\`\`js (11)
+const x = 3;
+const y = 8;
+const z = x + y;
+\`\`\`
+`;
+
 export const slideWithCustomSize = `---
 title: Slide with a custom size
 size: sm
