@@ -87,14 +87,15 @@ export default function GettingStarted() {
             <MarkdownPre md={slideStartSyntax} />
           </AlertBlock>
           <ExampleBlock title="With notes" md={slideWithNotes}>
-            You can use notes by using the <code>[note]: your note</code> syntax
+            You can use notes by using the <code>[note]: your note</code>{" "}
+            syntax.
           </ExampleBlock>
           <ExampleBlock title="With code" md={slideWithCode}>
             You can use code blocks with the <code>```</code> syntax. You can
-            specify the language to apply syntax highlighting
+            specify the language to apply syntax highlighting.
           </ExampleBlock>
           <AlertBlock>
-            Currently you can only have <b>one</b> code block <b>per</b> slide
+            Currently you can only have <b>one</b> code block <b>per</b> slide.
           </AlertBlock>
           <ExampleBlock
             title="With code highlighting"
@@ -103,7 +104,7 @@ export default function GettingStarted() {
             You can use highlight different lines of code by using{" "}
             <code>|1-2|3</code> after <code>```</code> this example first shows{" "}
             <b>all</b> the code then highlights lines <code>1</code> to{" "}
-            <code>2</code> and finally line <code>3</code>
+            <code>2</code> and finally line <code>3</code>.
           </ExampleBlock>
           <ExampleBlock
             title="With code line offset"
@@ -117,7 +118,7 @@ export default function GettingStarted() {
             There are a few configurations for the size of your presentation the{" "}
             <b>default</b> is <code>md</code>. These are the available sizes:{" "}
             <code>xs</code> <code>sm</code> <code>md</code> <code>lg</code>{" "}
-            <code>xl</code>
+            <code>xl</code>.
           </ExampleBlock>
         </div>
       </section>
