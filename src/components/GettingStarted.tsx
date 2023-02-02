@@ -52,16 +52,16 @@ function AlertBlock({ children }: AlertBlockProps) {
 }
 
 type ExampleBlockProps = {
+  children: React.ReactNode;
   title: string;
-  description: React.ReactNode;
   md: string;
 };
 
-function ExampleBlock({ title, description, md }: ExampleBlockProps) {
+function ExampleBlock({ children, title, md }: ExampleBlockProps) {
   return (
     <article className={styles.example}>
       <h3>{title}</h3>
-      <p>{description}</p>
+      <p>{children}</p>
       <MarkdownPre md={md} />
     </article>
   );
@@ -77,50 +77,32 @@ export default function GettingStarted() {
           <h2 className={styles.demped}>
             MDPres allows you to write your presentations with markdown
           </h2>
-          <ExampleBlock
-            title="Example of simple slides"
-            description="These are some very basic slides, including a title and some text."
-            md={basicSlide}
-          />
+          <ExampleBlock title="Example of simple slides" md={basicSlide}>
+            These are some very basic slides, including a title and some text.
+          </ExampleBlock>
           <AlertBlock>
             Every slide must start with:
             <MarkdownPre md={slideStartSyntax} />
           </AlertBlock>
-          <ExampleBlock
-            title="With notes"
-            description={
-              <>
-                You can use notes by using the <code>[note]: your note</code>{" "}
-                syntax
-              </>
-            }
-            md={slideWithNotes}
-          />
-          <ExampleBlock
-            title="With code"
-            description={
-              <>
-                You can use code blocks with the <code>```</code> syntax. You
-                can specify the language to apply syntax highlighting
-              </>
-            }
-            md={slideWithCode}
-          />
+          <ExampleBlock title="With notes" md={slideWithNotes}>
+            You can use notes by using the <code>[note]: your note</code> syntax
+          </ExampleBlock>
+          <ExampleBlock title="With code" md={slideWithCode}>
+            You can use code blocks with the <code>```</code> syntax. You can
+            specify the language to apply syntax highlighting
+          </ExampleBlock>
           <AlertBlock>
             Currently you can only have <b>one</b> code block <b>per</b> slide
           </AlertBlock>
           <ExampleBlock
             title="With code highlighting"
-            description={
-              <>
-                You can use highlight different lines of code by using{" "}
-                <code>|1-2|3</code> after <code>```</code> this example first
-                shows <b>all</b> the code then highlights lines <code>1</code>{" "}
-                to <code>2</code> and finally line <code>3</code>
-              </>
-            }
             md={slideWithCodeHighlighting}
-          />
+          >
+            You can use highlight different lines of code by using{" "}
+            <code>|1-2|3</code> after <code>```</code> this example first shows{" "}
+            <b>all</b> the code then highlights lines <code>1</code> to{" "}
+            <code>2</code> and finally line <code>3</code>
+          </ExampleBlock>
         </div>
       </section>
     </>
