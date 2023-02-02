@@ -78,7 +78,7 @@ export default function GettingStarted() {
           <h2 className={styles.demped}>
             MDPres allows you to write your presentations with markdown
           </h2>
-          <ExampleBlock title="Example of simple slides" md={basicSlide}>
+          <ExampleBlock title="A simple presentation" md={basicSlide}>
             These are some very basic slides, including a title and some text.
           </ExampleBlock>
           <AlertBlock>
