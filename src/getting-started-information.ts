@@ -56,3 +56,19 @@ const y = 8;
 const z = x + y;
 \`\`\`
 `;
+
+export const slideWithCustomSize = `---
+title: Slide with a custom size
+size: sm
+---
+
+# Custom size slide
+
+This slide has a custom size. The size specifics are listed below
+
+- xs: 320px
+- sm: 768px
+- md: 992px
+- lg: 1224px
+- xl: 1824px
+`;

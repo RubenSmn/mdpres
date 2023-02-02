@@ -5,6 +5,7 @@ import {
   slideStartSyntax,
   slideWithCode,
   slideWithCodeHighlighting,
+  slideWithCustomSize,
   slideWithNotes,
 } from "../getting-started-information";
 import useClipboard from "../hooks/useClipBoard";
@@ -102,6 +103,12 @@ export default function GettingStarted() {
             <code>|1-2|3</code> after <code>```</code> this example first shows{" "}
             <b>all</b> the code then highlights lines <code>1</code> to{" "}
             <code>2</code> and finally line <code>3</code>
+          </ExampleBlock>
+          <ExampleBlock title="Size configuration" md={slideWithCustomSize}>
+            There are a few configurations for the size of your presentation the{" "}
+            <b>default</b> is <code>md</code>. These are the available sizes:{" "}
+            <code>xs</code> <code>sm</code> <code>md</code> <code>lg</code>{" "}
+            <code>xl</code>
           </ExampleBlock>
         </div>
       </section>
