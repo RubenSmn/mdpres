@@ -94,4 +94,13 @@
 .informationBlock pre {
   margin-top: 0.5rem;
   padding: 1rem;
+  color: var(--yellowContrast);
+}
+
+.informationBlock .copyButton {
+  color: var(--yellowContrast);
+}
+
+.informationBlock .copyButton:hover {
+  background-color: var(--yellowDark);
 }
