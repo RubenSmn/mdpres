@@ -81,7 +81,8 @@ export default function GettingStarted() {
             md={basicSlide}
           />
           <AlertBlock>
-            Every slide must start with<pre>{slideStartSyntax}</pre>
+            Every slide must start with:
+            <MarkdownPre md={slideStartSyntax} />
           </AlertBlock>
           <ExampleBlock
             title="With notes"
