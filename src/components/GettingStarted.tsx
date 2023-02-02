@@ -69,7 +69,7 @@ export default function GettingStarted() {
   return (
     <>
       <Header />
-      <section>
+      <section className={styles.wrapper}>
         <div className={styles.container}>
           <h1>Getting Started</h1>
           <h2 className={styles.demped}>
