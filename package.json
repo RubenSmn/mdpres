@@ -10,6 +10,7 @@
     "lint": "eslint ./src --ext .ts,.tsx"
   },
   "dependencies": {
+    "copy-to-clipboard": "^3.3.3",
     "github-markdown-css": "^5.1.0",
     "prismjs": "^1.29.0",
     "react": "^18.2.0",

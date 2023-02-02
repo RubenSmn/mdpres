@@ -43,6 +43,25 @@ section {
   position: relative;
 }
 
+.copyButton {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: 0.75rem;
+  background-color: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: var(--darkBlue);
+  transition: background-color ease-in 200ms, color ease-in 200ms;
+}
+
+.copyButton:hover {
+  color: white;
+  background-color: var(--blue);
+}
+
 .container pre {
   font-size: 0.8rem;
   padding: 1.5rem;

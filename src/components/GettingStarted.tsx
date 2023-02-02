@@ -5,6 +5,26 @@ import {
   slideStartSyntax,
   slideWithNotes,
 } from "../getting-started-information";
+import useClipboard from "../hooks/useClipBoard";
+
+type CopyButtonProps = {
+  textToCopy: string;
+};
+
+function CopyButton({ textToCopy }: CopyButtonProps) {
+  const { hasCopied, onCopy } = useClipboard(textToCopy);
+
+  const handleClick = () => {
+    console.log(textToCopy);
+    onCopy();
+  };
+
+  return (
+    <span onClick={handleClick} className={styles.copyButton}>
+      {hasCopied ? "COPIED!" : "COPY"}
+    </span>
+  );
+}
 
 type MarkdownPreProps = {
   md: string;
@@ -13,6 +33,7 @@ type MarkdownPreProps = {
 function MarkdownPre({ md }: MarkdownPreProps) {
   return (
     <div className={styles.preContainer}>
+      <CopyButton textToCopy={md} />
       <pre>{md}</pre>
     </div>
   );
