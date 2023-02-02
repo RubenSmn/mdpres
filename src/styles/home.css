@@ -14,7 +14,14 @@ header {
   z-index: 999;
 }
 
-.header-links {
+.header-left {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header-right {
   display: flex;
   gap: 1rem;
 }
