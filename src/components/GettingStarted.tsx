@@ -76,9 +76,11 @@ export default function GettingStarted() {
       <section className={styles.wrapper}>
         <div className={styles.container}>
           <h1>Getting Started</h1>
-          <h2 className={styles.demped}>
-            MDPres allows you to write your presentations with markdown
-          </h2>
+          <h2>Creating the Presentation</h2>
+          <p>
+            Here is some information about making a Markdown presentation. The
+            basics to get started from notes to code blocks.
+          </p>
           <ExampleBlock title="A simple presentation" md={basicSlide}>
             These are some very basic slides, including a title and some text.
           </ExampleBlock>
