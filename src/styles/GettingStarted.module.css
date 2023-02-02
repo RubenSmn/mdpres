@@ -84,13 +84,10 @@
 
 .informationBlock {
   width: 100%;
-  /* padding: 1.5rem; */
   padding: 1rem;
-  /* border-radius: 0.75rem; */
   border-radius: 0.5rem;
   background-color: var(--yellow);
   color: var(--yellowContrast);
-  /* border-left: 0.75rem solid var(--yellowDark); */
   border-left: 0.55rem solid var(--yellowDark);
 }
 
