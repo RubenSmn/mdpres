@@ -20,12 +20,15 @@ const Menu: React.FC<MenuProps> = ({
 
   const handleAction = (e: React.FormEvent) => {
     e.preventDefault();
-    if (commandValue.toLowerCase() === "show notes") {
+    const lowerCaseValue = commandValue.toLowerCase();
+    if (lowerCaseValue === "help" || lowerCaseValue === "h") {
+      window.open("/getting-started");
+    } else if (lowerCaseValue === "show notes") {
       onCommandShowNotes(true);
-    } else if (commandValue.toLowerCase() === "hide notes") {
+    } else if (lowerCaseValue === "hide notes") {
       onCommandShowNotes(false);
     } else {
-      const result = commandValue.match(
+      const result = lowerCaseValue.match(
         /(?<slideIndex>\d+)(?:\:(?<subIndex>\d+))?/m,
       );
       const slideIndex = result?.groups?.slideIndex
