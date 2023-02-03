@@ -8,20 +8,12 @@ export const useSlideKeyHandler = (
       document.getSelection()?.removeAllRanges();
       switch (e.key) {
         case "ArrowLeft":
-          callback(-1, e.shiftKey);
-          break;
-        case "ArrowRight":
-          callback(1, e.shiftKey);
-          break;
         case "h":
-          callback(-1, e.shiftKey);
-          break;
-        case "l":
-          callback(1, e.shiftKey);
-          break;
         case "k":
           callback(-1, e.shiftKey);
           break;
+        case "ArrowRight":
+        case "l":
         case "j":
           callback(1, e.shiftKey);
           break;
