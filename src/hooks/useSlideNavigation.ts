@@ -5,6 +5,7 @@ export const useSlideKeyHandler = (
 ) => {
   useEffect(() => {
     const handleKeyUp = (e: KeyboardEvent) => {
+      if (document.activeElement?.matches("input")) return;
       document.getSelection()?.removeAllRanges();
       switch (e.key) {
         case "ArrowLeft":
