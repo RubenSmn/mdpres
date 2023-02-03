@@ -22,6 +22,12 @@ const Preview = () => {
     [...Array(slides.length).keys()].map((_) => createRef<HTMLDivElement>()),
   );
 
+  useEffect(() => {
+    scrollRefs.current = [...Array(slides.length).keys()].map((_) =>
+      createRef<HTMLDivElement>(),
+    );
+  }, [slides.length]);
+
   const changeSlideIndexByValue = useCallback(
     (delta: number) => {
       setCurrentSlideIndex((prevIndex) => {
