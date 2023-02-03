@@ -47,6 +47,7 @@ const Menu: React.FC<MenuProps> = ({
     const handleMenu = (e: KeyboardEvent) => {
       if (e.key !== "Escape") return;
       setIsOpen((prev) => !prev);
+      setCommandValue("");
     };
 
     window.addEventListener("keyup", handleMenu);
