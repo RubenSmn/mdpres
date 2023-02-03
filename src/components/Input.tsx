@@ -36,7 +36,6 @@ const Input = () => {
         const markdownAsReact = markdownToReact(slide.content);
         slide.markdown = markdownAsReact;
       });
-      console.log(res);
       setSlides(res);
     });
     setError(fileError);
