@@ -122,6 +122,65 @@ export default function GettingStarted() {
             <code>xs</code> <code>sm</code> <code>md</code> <code>lg</code>{" "}
             <code>xl</code>.
           </ExampleBlock>
+          <hr className={styles.divider} />
+          <h2>Presenting the Presentation</h2>
+          <article className={styles.example}>
+            <h3>Navigating around</h3>
+            <p>
+              You can navigate around the presentation by using the mouse, or
+              with the keyboard:{" "}
+              <kbd>
+                <abbr title="Left Arrow">Left</abbr>
+              </kbd>{" "}
+              will get you to the previous slide / code highlight and{" "}
+              <kbd>
+                <abbr title="Right Arrow">Right</abbr>
+              </kbd>{" "}
+              will go the the next. MDPres aslo allows for some <b>VIM</b>{" "}
+              keybindings such as{" "}
+              <kbd>
+                <abbr title="l">L</abbr>
+              </kbd>{" "}
+              and{" "}
+              <kbd>
+                <abbr title="h">H</abbr>
+              </kbd>
+              .
+            </p>
+            <p>
+              To <b>skip</b> the code lines highlighting and got directly to the
+              next slide you can use{" "}
+              <kbd>
+                <abbr title="Ctrl">Ctrl</abbr>
+              </kbd>{" "}
+              <kbd>
+                <abbr title="Left Arrow">Left</abbr>
+              </kbd>{" "}
+              or{" "}
+              <kbd>
+                <abbr title="Ctrl">Ctrl</abbr>
+              </kbd>{" "}
+              <kbd>
+                <abbr title="Right Arrow">Right</abbr>
+              </kbd>
+              .
+            </p>
+          </article>
+          <article className={styles.example}>
+            <h3>The Menu</h3>
+            <p>
+              The presentation menu can be opened by using{" "}
+              <kbd>
+                <abbr title="Escape">Esc</abbr>
+              </kbd>
+              . This will open a menu where you can use different commands such
+              as <code>show notes</code> and <code>hide notes</code> to, well...
+              show and hide your notes. You can also quickly move to a slide
+              using the slide number. <code>3</code> will move you to the{" "}
+              <b>third</b> slide and <code>3:2</code> will move you to the{" "}
+              <b>third</b> slide, <b>second</b> highlight.
+            </p>
+          </article>
         </div>
       </section>
     </>

@@ -27,6 +27,7 @@
 
 .example p {
   margin-bottom: 0.75rem;
+  display: inline-block;
 }
 
 .example code {
@@ -34,6 +35,7 @@
   background-color: var(--darkBlue);
   padding: 0.25rem;
   border-radius: 0.25rem;
+  display: inline-block;
 }
 
 .container h1 {
@@ -106,4 +108,26 @@
 
 .informationBlock .copyButton:hover {
   background-color: var(--yellowDark);
+}
+
+.divider {
+  margin-block: 2rem;
+  margin-inline: 1rem;
+  border-color: white;
+}
+
+.example kbd {
+  padding: 2px;
+  background-color: #edf2f7;
+  color: black;
+  border-radius: 0.25rem;
+  /* border: 1px solid #e2e8f0; */
+  border: 1px solid #cdd5e1;
+  border-bottom-width: 3px;
+}
+
+.example kbd abbr {
+  color: black;
+  font-weight: bold;
+  text-decoration: none;
 }
