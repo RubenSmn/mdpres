@@ -23,9 +23,9 @@ const Menu: React.FC<MenuProps> = ({
     const lowerCaseValue = commandValue.toLowerCase();
     if (lowerCaseValue === "help" || lowerCaseValue === "h") {
       window.open("/getting-started");
-    } else if (lowerCaseValue === "show notes") {
+    } else if (lowerCaseValue === "show notes" || lowerCaseValue === "sn") {
       onCommandShowNotes(true);
-    } else if (lowerCaseValue === "hide notes") {
+    } else if (lowerCaseValue === "hide notes" || lowerCaseValue === "hn") {
       onCommandShowNotes(false);
     } else {
       const result = lowerCaseValue.match(
