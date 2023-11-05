@@ -32,8 +32,10 @@ const Input = () => {
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const fileError = readMarkdownFile(e, (res: SlideType[]) => {
+      console.warn(res);
       res.forEach((slide: SlideType) => {
         const markdownAsReact = markdownToReact(slide.content);
+        console.warn(markdownAsReact);
         slide.markdown = markdownAsReact;
       });
       setSlides(res);

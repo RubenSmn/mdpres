@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import { useSubSlideContext } from "./SubSlideProvider";
 
-const Code: React.FC<any> = ({ children, data }) => {
+const Code = ({ children, data }: any) => {
   const lineOffset = data?.lineOffset || 1;
   const visibleLineCount = data?.visibleLineCount || 10;
   const ranges = useMemo(() => data?.ranges || [[1, Infinity]], [data?.ranges]);
